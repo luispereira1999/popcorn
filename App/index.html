@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Projeto Final PW1</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Um site que permite pesquisar entretenimento!">
+	<meta name="keywords" content="Movies, Music, Information">
+	<meta name="author" content="Lara Ribeiro, Luís Pereira, Maria Costa">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="images/logo.png"> 
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Kulim+Park|Roboto&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script type="text/javascript" defer src="js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/739a3f8b60.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<nav class="navigation-bar">
+		<img src="images/logo.png">
+		<h3>PopCorn</h3>
+		<button class="btn btn-fav"><i class="far fa-star"></i> 0</button>
+	</nav>
+
+	<section id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn">&times;</a>
+		<div class="favorites"></div>
+        <button class="export">Exportar favoritos</button>
+ 	</section>
+
+	<section id="search">
+		<form class="search-form" action="#" method="get" accept-charset="utf-8">
+			<select name="userSearch" required>
+                <option value="" disabled selected hidden>Escolha pelo que vai procurar</option>
+				<option value="music">Música</option>
+				<option value="movie">Filme</option>
+				<option value="show">Série</option>
+				<option value="book">Livro</option>
+				<option value="author">Autor</option>
+				<option value="game">Jogo</option>
+				<option value="podcast">Podcast</option>
+			</select> 
+			<input type="text" name="search field" placeholder="Música, Filmes, Séries, Livros, Autores, Jogos ou Podcasts" class="text-search"/>
+			<select name="userFound" required>
+				<option value=""
+				disabled selected hidden
+				>Escolha o que deseja encontrar</option>
+				<option value="music">Músicas</option>
+				<option value="movies">Filmes</option>
+				<option value="shows">Séries</option>
+				<option value="books">Livros</option>
+				<option value="authors">Autores</option>
+				<option value="games">Jogos</option>
+				<option value="podcasts">Podcasts</option>
+			</select> 
+			<button class="btn btn-search"><i class="fas fa-search"></i>Pesquisar</button>
+		</form>
+	</section>
+
+	<section id="slideshow">
+		<img class="mySlides" src="images/1.png">
+		<img class="mySlides" src="images/2.png">
+		<img class="mySlides" src="images/3.png">
+		<img class="mySlides" src="images/4.png">
+	</section>
+
+	<section class="cards-section"></section>
+	
+	<footer class="footer-section">
+		<div class="first-footer"></div>
+		<div class="second-footer">
+			<p>PopCorn © 2020</p>
+		</div>
+		<div class="third-footer">
+			<button class="btn btn-up"><i class="fas fa-chevron-up"></i></button>
+		</div>
+	</footer>
+</body>
+
+</html>
