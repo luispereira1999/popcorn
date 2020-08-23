@@ -1,35 +1,32 @@
+// é o tipo de conteúdo que será a pesquisa
+let contentType = "";
+// é o texto da pesquisa
+let searchText = "";
+// é o tipo de resultado que será encontrado na pesquisa
+let resultType = "";
+
+// guarda os dados de todos os resultado da pesquisa
+let searchResults = [];
+
+// guarda os dados de todos os resultados de favoritos
+let favoriteResults = [];
+
+// é o número de favoritos
+let numberOfFavoriteResults = 0;
+
+// guarda todos os favoritos
+let favorites = [];
+// índice atual da lista de favoritos
+let i = 0;
+
+let slideIndex = 0;
+var slideshowIsActive = true;
+var slideshowId = 0;
+
+
 $(document).ready(function () {
-    // é o tipo de conteúdo que será a pesquisa
-    let contentType = "";
-    // é o texto da pesquisa
-    let searchText = "";
-    // é o tipo de resultado que será encontrado na pesquisa
-    let resultType = "";
-
-    // guarda os dados de todos os resultado da pesquisa
-    let searchResults = [];
-
-    // guarda os dados de todos os resultados de favoritos
-    let favoriteResults = [];
-
-    // é o número de favoritos
-    let numberOfFavoriteResults = 0;
-
-    // // é a posição atual da imagem do slideshow
-    // let currentIndex = 0;
-    // let slideshowValue = 0;
-    // let slideshowIsActive = true;
-    // // inicializar slideshow
-    // let slideIndex = 0;
-    // if (slideshowIsActive) {
-    //     showSlideshow();
-    // }
-
-    // guarda todos os favoritos
-    let favorites = [];
-
-    // índice atual da lista de favoritos
-    let i = 0;
+    // iniciar slideshow ao carregar a página
+    slideshowId = showSlideshow(slideshowIsActive);
 
 
     // clicar no botão de mostrar a lista de favoritos
@@ -60,20 +57,12 @@ $(document).ready(function () {
         let input_search = document.getElementsByClassName("text-search")[0];
 
         if ($(input_search).val() != "" && $(option_content).val() != "" && $(option_result).val() != "") {
-            // if (slideshowIsActive === true) {
-            //     // parar slideshow
-            //     clearTimeout(slideshowValue);
-            //     // remover slideshow
-            //     $("section").remove("#slideshow");
-            //     slideshowIsActive = false;
-            // }
-            // if (slideshowIsActive) {
-            //     // parar slideshow
-            //     clearTimeout(slideshowValue);
-            //     // remover slideshow
-            //     $("section").remove("#slideshow");
-            //     slideshowIsActive = false;
-            // }
+            // ao fazer a pesquisa pela primeira vez, remove o slideshow
+            if (slideshowIsActive) {
+                clearTimeout(slideshowId);
+                $("section").remove("#slideshow");
+                slideshowIsActive = false;
+            }
 
             contentType = option_content.value;
             resultType = option_result.value;
@@ -84,14 +73,11 @@ $(document).ready(function () {
             let encodedText = encodeURIComponent(contentType + ":" + searchText);
 
             $.ajax({
-                // url do pedido
-                url: domain + "?k=" + apiKey + "&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
-
-                // especificar o tipo de chamada
-                jsonp: "callback",
-
-                // diz ao jquery que estamos à espera de jsonp
+                // configurar pedido à API
                 dataType: "jsonp",
+                jsonp: "callback",
+                type: "post",
+                url: domain + "?k=" + apiKey + "&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
 
                 // obtém os resultados da pesquisa
                 success: function (response) {
@@ -100,7 +86,7 @@ $(document).ready(function () {
 
                     if (numberOfSearchResults > 0) {
                         // obtém os resultados da pesquisa para um array de objetos
-                        getResults(response, numberOfSearchResults, searchResults);
+                        searchResults = getResults(response, numberOfSearchResults, searchResults);
 
                         // é o texto que indica a pesquisa realizada
                         let searchPresentationText = "Texto de Apresentação: ";
@@ -119,7 +105,9 @@ $(document).ready(function () {
 
 
     // clicar num botão de pesquisa de um card
-    $(".cards-section").on("click", ".card .search-icon", function () {
+    $(".cards-section").on("click", ".card .search-icon", function (e) {
+        e.preventDefault();
+
         let parentIndex = $(this).parent().index();
         searchText = searchResults[parentIndex].name;
 
@@ -128,17 +116,16 @@ $(document).ready(function () {
 
         $(".card").remove();
 
+        let domain = "https://tastedive.com/api/similar";
+        let apiKey = "382610-popcorn-40K5FW57";
         let encodedText = encodeURIComponent(contentType + ":" + searchText);
 
         $.ajax({
-            // url do pedido
-            url: "https://tastedive.com/api/similar?k=352546-PopcornO-A04D9R8O&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
-
-            // especificar o tipo de chamada
-            jsonp: "callback",
-
-            // diz ao jquery que estamos à espera de jsonp
+            // configurar pedido à API
             dataType: "jsonp",
+            jsonp: "callback",
+            type: "post",
+            url: domain + "?k=" + apiKey + "&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
 
             // obtém os resultados da pesquisa
             success: function (response) {
@@ -148,7 +135,7 @@ $(document).ready(function () {
 
                 if (numberOfSearchResults > 0) {
                     // obtém os resultados da pesquisa para um array de objetos
-                    getResults(response, numberOfSearchResults);
+                    searchResults = getResults(response, numberOfSearchResults, searchResults);
 
                     // é o texto que indica a pesquisa realizada
                     let searchPresentationText = "Texto de Apresentação: ";

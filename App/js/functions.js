@@ -1,3 +1,25 @@
+// mostrar slideshow
+function showSlideshow() {
+    let slides = document.getElementsByClassName("mySlides");
+    if (slides.length == 0) {
+        return;
+    }
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.display = "block";
+
+    // a imagem muda num espaço de 4 segundos
+    return setTimeout(showSlideshow, 4000);
+}
+
+
 // obtém os resultados da pesquisa
 function getResults(response, numberOfSearchResults, searchResults) {
     // guarda os dados de um resultado da pesquisa
@@ -17,6 +39,8 @@ function getResults(response, numberOfSearchResults, searchResults) {
         result.isFavorite = false;
         searchResults.push(JSON.parse(JSON.stringify(result)));
     }
+
+    return searchResults;
 }
 
 
@@ -207,34 +231,4 @@ function setCards(searchResults, numberOfSearchResults) {
         // adicionar card ao array de cards
         cards.push(card);
     }
-}
-
-
-// mostrar o slideshow
-function showSlideshow() {
-    // let i;
-    // let slides = document.getElementsByClassName("mySlides");
-    // for (i = 0; i < slides.length; i++) {
-    //     slides[i].style.display = "none";
-    // }
-    // slideIndex++;
-    // if (slideIndex > slides.length) { slideIndex = 1 }
-    // slides[slideIndex - 1].style.display = "block";
-    // setTimeout(showSlideshow, 6000); // Change image every 2 seconds
-
-
-    let slides = document.getElementsByClassName("mySlides");
-
-    for (let i = 0; i < slides.length; i++)
-        $(slides[i]).hide();
-
-    currentIndex++;
-
-    if (currentIndex > slides.length)
-        currentIndex = 1;
-
-    $(slides[currentIndex - 1]).show();
-
-    // a imagem muda num espaço de 4 segundos
-    slideshowValue = setTimeout(showSlideshow, 6000);
 }
