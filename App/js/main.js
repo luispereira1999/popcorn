@@ -6,7 +6,7 @@ let searchText = "";
 let resultType = "";
 
 // guarda os dados de todos os resultado da pesquisa
-let searchResults = [];
+let results = [];
 
 // guarda os dados de todos os resultados de favoritos
 let favoriteResults = [];
@@ -20,29 +20,17 @@ let favorites = [];
 let i = 0;
 
 let slideIndex = 0;
-var slideshowIsActive = true;
-var slideshowId = 0;
+let slideshowIsActive = true;
+let slideshowId = 0;
 
 
-$(document).ready(function () {
+$(document).ready(function() {
     // iniciar slideshow ao carregar a página
     slideshowId = showSlideshow(slideshowIsActive);
 
 
-    // clicar no botão de mostrar a lista de favoritos
-    $(".btn-fav").click(function () {
-        document.getElementById("mySidenav").style.width = "300px";
-    });
-
-
-    // clicar no botão de esconder a lista de favoritos
-    $(".closebtn").click(function () {
-        document.getElementById("mySidenav").style.width = "0";
-    });
-
-
     // clicar no botão para a pesquisa principal
-    $(".btn-search").click(function (e) {
+    $(".btn-search").click(function(e) {
         e.preventDefault();
 
         // obtém o elemento da dropdown do conteúdo da pesquisa
@@ -57,13 +45,6 @@ $(document).ready(function () {
         let input_search = document.getElementsByClassName("text-search")[0];
 
         if ($(input_search).val() != "" && $(option_content).val() != "" && $(option_result).val() != "") {
-            // ao fazer a pesquisa pela primeira vez, remove o slideshow
-            if (slideshowIsActive) {
-                clearTimeout(slideshowId);
-                $("section").remove("#slideshow");
-                slideshowIsActive = false;
-            }
-
             contentType = option_content.value;
             resultType = option_result.value;
             searchText = input_search.value;
@@ -80,38 +61,45 @@ $(document).ready(function () {
                 url: domain + "?k=" + apiKey + "&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
 
                 // obtém os resultados da pesquisa
-                success: function (response) {
+                success: function(response) {
                     // obtém o número de resultados
-                    let numberOfSearchResults = getNumberOfSearchResults(response);
+                    let numberOfResults = getNumberOfResults(response);
 
-                    if (numberOfSearchResults > 0) {
+                    if (numberOfResults > 0) {
+                        // ao fazer a pesquisa pela primeira vez, remove o slideshow
+                        if (slideshowIsActive) {
+                            clearTimeout(slideshowId);
+                            $("section").remove("#slideshow");
+                            slideshowIsActive = false;
+                        }
+
                         // obtém os resultados da pesquisa para um array de objetos
-                        searchResults = getResults(response, numberOfSearchResults, searchResults);
+                        results = getResults(response, numberOfResults, results);
 
                         // é o texto que indica a pesquisa realizada
                         let searchPresentationText = "Texto de Apresentação: ";
 
-                        setCards(searchResults, numberOfSearchResults);
+                        setCards(results, numberOfResults, resultType);
                         //console.log(searchPresentationText);
+                    } else {
+                        showMessage("Sem resultados!");
                     }
-                    else
-                        alert("Sem resultados!");
                 }
             });
+        } else {
+            showMessage("Valor não inserido!");
         }
-        else
-            alert("Erro: Valor não inserido!");
     });
 
 
     // clicar num botão de pesquisa de um card
-    $(".cards-section").on("click", ".card .search-icon", function (e) {
+    $(".cards-section").on("click", ".card .search-icon", function(e) {
         e.preventDefault();
 
         let parentIndex = $(this).parent().index();
-        searchText = searchResults[parentIndex].name;
+        searchText = results[parentIndex].name;
 
-        searchResults = [];
+        results = [];
         alert("Novo texto da pesquisa:" + searchText);
 
         $(".card").remove();
@@ -128,35 +116,34 @@ $(document).ready(function () {
             url: domain + "?k=" + apiKey + "&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
 
             // obtém os resultados da pesquisa
-            success: function (response) {
-                //console.log(response);
+            success: function(response) {
                 // obtém o número de resultados
-                let numberOfSearchResults = getNumberOfSearchResults(response);
+                let numberOfResults = getNumberOfResults(response);
 
-                if (numberOfSearchResults > 0) {
+                if (numberOfResults > 0) {
                     // obtém os resultados da pesquisa para um array de objetos
-                    searchResults = getResults(response, numberOfSearchResults, searchResults);
+                    results = getResults(response, numberOfResults, results);
 
                     // é o texto que indica a pesquisa realizada
                     let searchPresentationText = "Texto de Apresentação: ";
 
-                    //ShowResults(searchResults, numberOfSearchResults);
-                    setCards(searchResults, numberOfSearchResults);
+                    //ShowResults(results, numberOfResults);
+                    setCards(results, numberOfResults);
                     //console.log(searchPresentationText);
+                } else {
+                    showMessage("Sem resultados!");
                 }
-                else
-                    alert("Sem resultados!");
             }
         });
     });
 
 
     // clicar num icon de favorito de um card
-    $(".cards-section").on("click", ".card .favorite-icon", function () {
+    $(".cards-section").on("click", ".card .favorite-icon", function() {
         let parentIndex = $(this).parent().index();
 
-        if (!searchResults[parentIndex].isFavorite) {
-            //searchResults[parentIndex].isFavorite = true;
+        if (!results[parentIndex].isFavorite) {
+            //results[parentIndex].isFavorite = true;
             numberOfFavoriteResults += 1;
             document.getElementsByClassName("btn-fav")[0].innerHTML = numberOfFavoriteResults;
 
@@ -185,7 +172,7 @@ $(document).ready(function () {
             favorite.button_delete.setAttribute("class", "btn btn-del fas fa-trash-alt");
 
             // definir texto dos elementos
-            favorite.h4_name.innerHTML = searchResults[parentIndex].name;
+            favorite.h4_name.innerHTML = results[parentIndex].name;
 
             // adicionar elementos ao DOM
             favorite.div_favorite.appendChild(favorite.h4_name);
@@ -195,7 +182,7 @@ $(document).ready(function () {
             setTag(favorite, resultType);
             // adicionar favorito ao array de favoritos
             favorites.push(favorite);
-            favoriteResults.push(searchResults[parentIndex]);
+            favoriteResults.push(results[parentIndex]);
             favoriteResults[i].isFavorite = true;
 
             i += 1;
@@ -204,7 +191,7 @@ $(document).ready(function () {
 
 
     // clicar no remover favorito
-    $(".favorites").on("click", ".favorite .btn-del", function () {
+    $(".favorites").on("click", ".favorite .btn-del", function() {
         let parentIndex = $(this).parent().index();
         this.parentElement.remove(this);
         favoriteResults[parentIndex].isFavorite = false;
@@ -215,14 +202,26 @@ $(document).ready(function () {
     });
 
 
-    // clicar no botão para exportar para json
-    $(".export").click(function () {
+    // clicar no botão de mostrar a lista de favoritos
+    $(".btn-fav").click(function() {
+        document.getElementById("mySidenav").style.width = "300px";
+    });
+
+
+    // clicar no botão de esconder a lista de favoritos
+    $(".closebtn").click(function() {
+        document.getElementById("mySidenav").style.width = "0";
+    });
+
+
+    // clicar no botão para exportar para JSON
+    $(".export").click(function() {
         console.log(JSON.stringify(favoriteResults));
     });
 
 
     // clicar no botão de ir para o topo da página
-    $(".btn-up").click(function () {
+    $(".btn-up").click(function() {
         $("html, body").animate({ scrollTop: 0 }, 1000);
     });
-}); 
+});
