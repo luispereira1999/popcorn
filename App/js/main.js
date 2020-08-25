@@ -145,14 +145,14 @@ $(document).ready(function() {
     });
 
 
-    // clicar no ícone de remover favorito
-    $(".favorites").on("click", ".favorite .btn-del", function() {
-        let parentIndex = $(this).parent().index();
-        this.parentElement.remove(this);
-        numberOfFavorites -= 1;
-        document.getElementsByClassName("btn-fav")[0].innerHTML = numberOfFavorites;
-        // favorites.splice($.inArray(parentIndex, favorites), 1);
-        currentFavoriteIndex -= 1;
+    // clicar num botão de remover favorito
+    $("#favorites").on("click", ".favorite .btn-del", function() {
+        let name = $(this).parent().children("h4").text();
+        let favorite_div = $(this).parent();
+
+        favorites = removeFavorite(favorites, name);
+        destroyFavoriteHTML(favorite_div);
+        numberOfFavorites = updateNumberOfFavorites("subtract");
     });
 
 

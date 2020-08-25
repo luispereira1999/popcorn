@@ -180,6 +180,20 @@ function updateNumberOfFavorites(operation) {
 }
 
 
+// remover favorito
+function removeFavorite(array, element) {
+    return array = $.grep(array, function(value) {
+        return value != element;
+    });
+}
+
+
+// destruir elementos HTML do favorito
+function destroyFavoriteHTML(element) {
+    $(element).remove();
+}
+
+
 // mostrar mensagem
 function showMessage(message, error) {
     alertify.set("notifier", "position", "top-center");
