@@ -8,16 +8,11 @@ let resultType = "";
 // guarda os dados de todos os resultado da pesquisa
 let results = [];
 
-// guarda os dados de todos os resultados de favoritos
-let favoriteResults = [];
-
-// é o número de favoritos
-let numberOfFavoriteResults = 0;
-
-// guarda todos os favoritos
+// guarda a lista de favoritos
 let favorites = [];
+let numberOfFavorites = 0;
 // índice atual da lista de favoritos
-let i = 0;
+// let currentFavoriteIndex = 0;
 
 let slideIndex = 0;
 let slideshowIsActive = true;
@@ -82,12 +77,12 @@ $(document).ready(function() {
                         setCards(results, numberOfResults, resultType);
                         //console.log(searchPresentationText);
                     } else {
-                        showMessage("Sem resultados!");
+                        showMessage("Sem resultados!", "error");
                     }
                 }
             });
         } else {
-            showMessage("Valor não inserido!");
+            showMessage("Valor não inserido!", "error");
         }
     });
 
@@ -131,84 +126,43 @@ $(document).ready(function() {
                     setCards(results, numberOfResults);
                     //console.log(searchPresentationText);
                 } else {
-                    showMessage("Sem resultados!");
+                    showMessage("Sem resultados!", "error");
                 }
             }
         });
     });
 
 
-    // clicar num icon de favorito de um card
+    // clicar num ícone de favorito de um card
     $(".cards-section").on("click", ".card .favorite-icon", function() {
-        let parentIndex = $(this).parent().index();
+        let name = $(this).parent().children("h3").text();
 
-        if (!results[parentIndex].isFavorite) {
-            //results[parentIndex].isFavorite = true;
-            numberOfFavoriteResults += 1;
-            document.getElementsByClassName("btn-fav")[0].innerHTML = numberOfFavoriteResults;
-
-            // guarda os elementos de um favorito
-            let favorite = {
-                div_favorite: null,
-                h4_name: null,
-                p_tag: null,
-                button_delete: null
-            };
-
-            // é a div que contém todos os favoritos
-            let div_favorites = document.getElementsByClassName("favorites")[0];
-
-            // criar elementos
-            favorite.div_favorite = document.createElement("div");
-            favorite.h4_name = document.createElement("h4");
-            favorite.p_tag = document.createElement("p");
-            favorite.button_delete = document.createElement("button");
-
-            // definir atributos dos elementos
-            favorite.div_favorite.setAttribute("id", "favorite-" + i);
-            favorite.div_favorite.setAttribute("class", "favorite");
-            favorite.h4_name.setAttribute("class", "title-fav");
-            favorite.p_tag.setAttribute("class", "tags tags-fav");
-            favorite.button_delete.setAttribute("class", "btn btn-del fas fa-trash-alt");
-
-            // definir texto dos elementos
-            favorite.h4_name.innerHTML = results[parentIndex].name;
-
-            // adicionar elementos ao DOM
-            favorite.div_favorite.appendChild(favorite.h4_name);
-            favorite.div_favorite.appendChild(favorite.p_tag);
-            favorite.div_favorite.appendChild(favorite.button_delete);
-            div_favorites.appendChild(favorite.div_favorite);
-            setTag(favorite, resultType);
-            // adicionar favorito ao array de favoritos
-            favorites.push(favorite);
-            favoriteResults.push(results[parentIndex]);
-            favoriteResults[i].isFavorite = true;
-
-            i += 1;
+        if (!favorites.includes(name)) {
+            favorites = addFavorite(favorites, name);
+            createFavoriteHTML(name, resultType);
+            numberOfFavorites = updateNumberOfFavorites("add");
         }
     });
 
 
-    // clicar no remover favorito
+    // clicar no ícone de remover favorito
     $(".favorites").on("click", ".favorite .btn-del", function() {
         let parentIndex = $(this).parent().index();
         this.parentElement.remove(this);
-        favoriteResults[parentIndex].isFavorite = false;
-        numberOfFavoriteResults -= 1;
-        document.getElementsByClassName("btn-fav")[0].innerHTML = numberOfFavoriteResults;
-        favorites.splice($.inArray(parentIndex, favorites), 1);
-        i -= 1;
+        numberOfFavorites -= 1;
+        document.getElementsByClassName("btn-fav")[0].innerHTML = numberOfFavorites;
+        // favorites.splice($.inArray(parentIndex, favorites), 1);
+        currentFavoriteIndex -= 1;
     });
 
 
-    // clicar no botão de mostrar a lista de favoritos
+    // clicar no botão de mostrar favoritos
     $(".btn-fav").click(function() {
         document.getElementById("mySidenav").style.width = "300px";
     });
 
 
-    // clicar no botão de esconder a lista de favoritos
+    // clicar no botão de esconder favoritos
     $(".closebtn").click(function() {
         document.getElementById("mySidenav").style.width = "0";
     });
@@ -216,7 +170,7 @@ $(document).ready(function() {
 
     // clicar no botão para exportar para JSON
     $(".export").click(function() {
-        console.log(JSON.stringify(favoriteResults));
+        console.log(JSON.stringify(favorites));
     });
 
 

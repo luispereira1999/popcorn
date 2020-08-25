@@ -20,15 +20,13 @@ function showSlideshow() {
 }
 
 
-// obtém os resultados da pesquisa
+// obter resultados da pesquisa
 function getResults(response, numberOfResults, results) {
-    // guarda os dados de um resultado da pesquisa
     let result = {
         name: "",
         description: "",
         youtubeLink: "",
         wikipediaLink: "",
-        isFavorite: false
     };
 
     for (let i = 0; i < numberOfResults; i++) {
@@ -36,7 +34,6 @@ function getResults(response, numberOfResults, results) {
         result.description = response.Similar.Results[i].wTeaser;
         result.youtubeLink = response.Similar.Results[i].yUrl;
         result.wikipediaLink = response.Similar.Results[i].wUrl;
-        result.isFavorite = false;
         results.push(JSON.parse(JSON.stringify(result)));
     }
 
@@ -44,13 +41,13 @@ function getResults(response, numberOfResults, results) {
 }
 
 
-// obtém o número de resultados da pesquisa
+// obter número de resultados da pesquisa
 function getNumberOfResults(response) {
     return response.Similar.Results.length;
 }
 
 
-// definir os cards quando a pesquisa é realizada
+// definir cards quando a pesquisa é realizada
 function setCards(results, numberOfResults, resultType) {
     // guarda os elementos de um card criado através da pesquisa
     let card = {
@@ -124,35 +121,67 @@ function setCards(results, numberOfResults, resultType) {
 }
 
 
-// definir tag no card
-function setTag(tag, resultType) {
-    if (resultType === "music") {
-        tag.setAttribute("class", "tags tags-musicas");
-        tag.innerHTML = "Música";
-    } else if (resultType === "movies") {
-        tag.setAttribute("class", "tags tags-filmes");
-        tag.innerHTML = "Filme";
-    } else if (resultType === "shows") {
-        tag.setAttribute("class", "tags tags-series");
-        tag.innerHTML = "Série";
-    } else if (resultType === "books") {
-        tag.setAttribute("class", "tags tags-livros");
-        tag.innerHTML = "Livro";
-    } else if (resultType === "authors") {
-        tag.setAttribute("class", "tags tags-autores");
-        tag.innerHTML = "Autor";
-    } else if (resultType === "games") {
-        tag.setAttribute("class", "tags tags-jogos");
-        tag.innerHTML = "Jogo";
-    } else if (resultType === "podcasts") {
-        tag.setAttribute("class", "tags tags-podcasts");
-        tag.innerHTML = "Podcast";
+// definir tag
+function setTag(element, type) {
+    if (type === "music") {
+        element.setAttribute("class", "tags tags-musicas");
+        element.innerHTML = "Música";
+    } else if (type === "movies") {
+        element.setAttribute("class", "tags tags-filmes");
+        element.innerHTML = "Filme";
+    } else if (type === "shows") {
+        element.setAttribute("class", "tags tags-series");
+        element.innerHTML = "Série";
+    } else if (type === "books") {
+        element.setAttribute("class", "tags tags-livros");
+        element.innerHTML = "Livro";
+    } else if (type === "authors") {
+        element.setAttribute("class", "tags tags-autores");
+        element.innerHTML = "Autor";
+    } else if (type === "games") {
+        element.setAttribute("class", "tags tags-jogos");
+        element.innerHTML = "Jogo";
+    } else if (type === "podcasts") {
+        element.setAttribute("class", "tags tags-podcasts");
+        element.innerHTML = "Podcast";
     }
 }
 
 
+// adicionar favorito
+function addFavorite(array, element) {
+    array.push(element);
+    return array;
+}
+
+
+// criar elementos HTML do favorito
+function createFavoriteHTML(text, type) {
+    let favorite = new FavoriteHTML();
+    favorite.setAttributes(text, type);
+    favorite.addToDOM();
+}
+
+
+// atualizar número de favoritos
+function updateNumberOfFavorites(operation) {
+    let currentLength = document.getElementById("numberOfFavorites").innerHTML;
+
+    if (operation == "add") {
+        currentLength = parseInt(currentLength);
+        currentLength += 1;
+    } else if (operation == "subtract") {
+        currentLength = parseInt(currentLength);
+        currentLength -= 1;
+    }
+
+    document.getElementById("numberOfFavorites").innerHTML = currentLength;
+    return currentLength;
+}
+
+
 // mostrar mensagem
-function showMessage(message) {
+function showMessage(message, error) {
     alertify.set("notifier", "position", "top-center");
-    alertify.notify(message, "error");
+    alertify.notify(message, error);
 }

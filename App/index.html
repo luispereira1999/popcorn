@@ -20,6 +20,7 @@
     <!-- JS -->
     <script type="text/javascript" defer src="js/main.js"></script>
     <script type="text/javascript" defer src="js/functions.js"></script>
+    <script type="text/javascript" defer src="js/favoriteHTML.js"></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
@@ -35,12 +36,12 @@
     <nav class="navigation-bar">
         <img src="images/logo.png">
         <h3>PopCorn</h3>
-        <button class="btn btn-fav"><i class="far fa-star"></i> 0</button>
+        <button class="btn btn-fav"><i class="far fa-star"></i> <span id="numberOfFavorites">0</span></button>
     </nav>
 
     <section id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn">&times;</a>
-        <div class="favorites"></div>
+        <div id="favorites"></div>
         <button class="export">Exportar favoritos</button>
     </section>
 
@@ -55,8 +56,10 @@
 				<option value="author">Autor</option>
 				<option value="game">Jogo</option>
 				<option value="podcast">Podcast</option>
-			</select>
+            </select>
+
             <input type="text" name="search field" placeholder="Música, Filmes, Séries, Livros, Autores, Jogos ou Podcasts" class="text-search" />
+
             <select name="userFound" required>
 				<option value="" disabled selected hidden>Escolha o que deseja encontrar</option>
 				<option value="music">Músicas</option>
