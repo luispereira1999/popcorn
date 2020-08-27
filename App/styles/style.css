@@ -79,16 +79,7 @@ p {
     justify-content: center;
 }
 
-#textSearch {
-    padding: 10px 14px;
-    font-size: 13px;
-    background-color: #252525;
-    border: unset;
-    color: #e0e0e0;
-    width: 30%;
-}
-
-#search select[name="userSearch"] {
+#userSearch {
     background-color: #252525;
     border: unset;
     border-right: 1px solid #2b2b2b;
@@ -98,7 +89,16 @@ p {
     font-size: 13px;
 }
 
-#search select[name="userFound"] {
+#textSearch {
+    padding: 10px 14px;
+    font-size: 13px;
+    background-color: #252525;
+    border: unset;
+    color: #e0e0e0;
+    width: 30%;
+}
+
+#userFound {
     background-color: #252525;
     border: unset;
     border-right: 1px solid #2b2b2b;
@@ -452,9 +452,9 @@ select:focus {
         flex-wrap: wrap;
         align-items: center;
     }
-    .foundSearch,
+    #userSearch,
     #textSearch,
-    .userSearch,
+    #userFound,
     .btn-search {
         width: 100% !important;
     }

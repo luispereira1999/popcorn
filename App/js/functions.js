@@ -1,6 +1,6 @@
 // mostrar slideshow
 function showSlideshow() {
-    let slides = document.getElementsByClassName("mySlides");
+    let slides = $(".mySlides");
     if (slides.length == 0) {
         return;
     }
@@ -30,9 +30,8 @@ function removeSlideshow(slideshowId) {
 
 // obter tipo de conteúdo da pesquisa
 function getContentType() {
-    let dropdown_content = document.getElementsByName("userSearch")[0];
-    let option_content = dropdown_content.options[dropdown_content.selectedIndex];
-    return option_content.value;
+    let text = $("#userSearch option:selected").val();
+    return text;
 }
 
 
@@ -50,9 +49,8 @@ function getSearchText(element) {
 
 // obter tipo de resultado da pesquisa
 function getResultType() {
-    let dropdown_result = document.getElementsByName("userFound")[0];
-    let option_result = dropdown_result.options[dropdown_result.selectedIndex];
-    return option_result.value;
+    let text = $("#userFound option:selected").val();
+    return text;
 }
 
 
@@ -103,26 +101,26 @@ function destroyCardsHTML() {
 // definir atributos do elemento HTML da tag
 function setTagHTML(element, type) {
     if (type === "music") {
-        element.setAttribute("class", "tags tags-musicas");
-        element.innerHTML = "Música";
+        element.addClass("tags tags-musicas");
+        element.text("Música");
     } else if (type === "movies") {
-        element.setAttribute("class", "tags tags-filmes");
-        element.innerHTML = "Filme";
+        element.addClass("tags tags-filmes");
+        element.text("Filme");
     } else if (type === "shows") {
-        element.setAttribute("class", "tags tags-series");
-        element.innerHTML = "Série";
+        element.addClass("tags tags-series");
+        element.text("Série");
     } else if (type === "books") {
-        element.setAttribute("class", "tags tags-livros");
-        element.innerHTML = "Livro";
+        element.addClass("tags tags-livros");
+        element.text("Livro");
     } else if (type === "authors") {
-        element.setAttribute("class", "tags tags-autores");
-        element.innerHTML = "Autor";
+        element.addClass("tags tags-autores");
+        element.text("Autor");
     } else if (type === "games") {
-        element.setAttribute("class", "tags tags-jogos");
-        element.innerHTML = "Jogo";
+        element.addClass("tags tags-jogos");
+        element.text("Jogo");
     } else if (type === "podcasts") {
-        element.setAttribute("class", "tags tags-podcasts");
-        element.innerHTML = "Podcast";
+        element.addClass("tags tags-podcasts");
+        element.text("Podcast");
     }
 }
 
@@ -158,21 +156,21 @@ function destroyFavoriteHTML(element) {
 
 // adicionar número de favoritos
 function increaseNumberOfFavorites() {
-    let currentLength = document.getElementById("numberOfFavorites").innerHTML;
+    let currentLength = $("#numberOfFavorites").text();
     currentLength = parseInt(currentLength);
     currentLength += 1;
 
-    document.getElementById("numberOfFavorites").innerHTML = currentLength;
+    $("#numberOfFavorites").text(currentLength);
 }
 
 
 // subtrair número de favoritos
 function decreaseNumberOfFavorites() {
-    let currentLength = document.getElementById("numberOfFavorites").innerHTML;
+    let currentLength = $("#numberOfFavorites").text();
     currentLength = parseInt(currentLength);
     currentLength -= 1;
 
-    document.getElementById("numberOfFavorites").innerHTML = currentLength;
+    $("#numberOfFavorites").text(currentLength);
 }
 
 
