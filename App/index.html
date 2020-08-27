@@ -20,6 +20,7 @@
     <!-- JS -->
     <script type="text/javascript" defer src="js/main.js"></script>
     <script type="text/javascript" defer src="js/functions.js"></script>
+    <script type="text/javascript" defer src="js/cardHTML.js"></script>
     <script type="text/javascript" defer src="js/favoriteHTML.js"></script>
 
     <!-- Font Awesome -->
@@ -58,7 +59,7 @@
 				<option value="podcast">Podcast</option>
             </select>
 
-            <input type="text" name="search field" placeholder="Música, Filmes, Séries, Livros, Autores, Jogos ou Podcasts" class="text-search" />
+            <input type="text" name="search field" placeholder="Música, Filmes, Séries, Livros, Autores, Jogos ou Podcasts" id="textSearch" />
 
             <select name="userFound" required>
 				<option value="" disabled selected hidden>Escolha o que deseja encontrar</option>
@@ -81,7 +82,7 @@
         <img class="mySlides" src="images/4.png">
     </section>
 
-    <section class="cards-section"></section>
+    <section id="cards"></section>
 
     <footer class="footer-section">
         <div class="first-footer"></div>

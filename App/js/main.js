@@ -1,22 +1,11 @@
-// é o tipo de conteúdo que será a pesquisa
-let contentType = "";
-// é o texto da pesquisa
-let searchText = "";
-// é o tipo de resultado que será encontrado na pesquisa
-let resultType = "";
-
-// guarda os dados de todos os resultado da pesquisa
-let results = [];
-
-// guarda a lista de favoritos
-let favorites = [];
-let numberOfFavorites = 0;
-// índice atual da lista de favoritos
-// let currentFavoriteIndex = 0;
-
 let slideIndex = 0;
 let slideshowIsActive = true;
 let slideshowId = 0;
+
+let contentType = "";
+let resultType = "";
+
+let favorites = [];
 
 
 $(document).ready(function() {
@@ -28,57 +17,40 @@ $(document).ready(function() {
     $(".btn-search").click(function(e) {
         e.preventDefault();
 
-        // obtém o elemento da dropdown do conteúdo da pesquisa
-        let dropdown_content = document.getElementsByName("userSearch")[0];
-        // obtém o elemento da opção da dropdown do conteúdo da pesquisa
-        let option_content = dropdown_content.options[dropdown_content.selectedIndex];
-        // obtém o elemento da dropdown do resultado da pesquisa
-        let dropdown_result = document.getElementsByName("userFound")[0];
-        // obtém o elemento da opção da dropdown do resultado da pesquisa
-        let option_result = dropdown_result.options[dropdown_result.selectedIndex];
-        // obtém o elemento do input da pesquisa
-        let input_search = document.getElementsByClassName("text-search")[0];
+        contentType = getContentType();
+        let searchText = getSearchText($("#textSearch"));
+        resultType = getResultType();
 
-        if ($(input_search).val() != "" && $(option_content).val() != "" && $(option_result).val() != "") {
-            contentType = option_content.value;
-            resultType = option_result.value;
-            searchText = input_search.value;
-
+        if (contentType != "" && searchText != "" && resultType != "") {
             let domain = "https://tastedive.com/api/similar";
             let apiKey = "382610-popcorn-40K5FW57";
             let encodedText = encodeURIComponent(contentType + ":" + searchText);
 
+            // fazer pedido à API
             $.ajax({
-                // configurar pedido à API
                 dataType: "jsonp",
                 jsonp: "callback",
                 type: "post",
                 url: domain + "?k=" + apiKey + "&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
 
-                // obtém os resultados da pesquisa
                 success: function(response) {
-                    // obtém o número de resultados
                     let numberOfResults = getNumberOfResults(response);
 
                     if (numberOfResults > 0) {
                         // ao fazer a pesquisa pela primeira vez, remove o slideshow
                         if (slideshowIsActive) {
-                            clearTimeout(slideshowId);
-                            $("section").remove("#slideshow");
-                            slideshowIsActive = false;
+                            slideshowIsActive = removeSlideshow(slideshowId);
                         }
 
-                        // obtém os resultados da pesquisa para um array de objetos
-                        results = getResults(response, numberOfResults, results);
-
-                        // é o texto que indica a pesquisa realizada
-                        let searchPresentationText = "Texto de Apresentação: ";
-
-                        setCards(results, numberOfResults, resultType);
-                        //console.log(searchPresentationText);
+                        let results = getResults(response);
+                        createCardsHTML(results, resultType);
                     } else {
                         showMessage("Sem resultados!", "error");
                     }
+                },
+
+                error: function() {
+                    showMessage("Erro ao comunicar com o servidor!", "error");
                 }
             });
         } else {
@@ -87,60 +59,51 @@ $(document).ready(function() {
     });
 
 
-    // clicar num botão de pesquisa de um card
-    $(".cards-section").on("click", ".card .search-icon", function(e) {
+    // clicar num botão de pesquisa num card
+    $("#cards").on("click", ".card .search-icon", function(e) {
         e.preventDefault();
 
-        let parentIndex = $(this).parent().index();
-        searchText = results[parentIndex].name;
+        let searchText = getSearchText($(this).parent().children("h3"));
 
-        results = [];
-        alert("Novo texto da pesquisa:" + searchText);
-
-        $(".card").remove();
+        destroyCardsHTML();
 
         let domain = "https://tastedive.com/api/similar";
         let apiKey = "382610-popcorn-40K5FW57";
         let encodedText = encodeURIComponent(contentType + ":" + searchText);
 
+        // fazer pedido à API
         $.ajax({
-            // configurar pedido à API
             dataType: "jsonp",
             jsonp: "callback",
             type: "post",
             url: domain + "?k=" + apiKey + "&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
 
-            // obtém os resultados da pesquisa
             success: function(response) {
-                // obtém o número de resultados
                 let numberOfResults = getNumberOfResults(response);
 
                 if (numberOfResults > 0) {
-                    // obtém os resultados da pesquisa para um array de objetos
-                    results = getResults(response, numberOfResults, results);
-
-                    // é o texto que indica a pesquisa realizada
-                    let searchPresentationText = "Texto de Apresentação: ";
-
-                    //ShowResults(results, numberOfResults);
-                    setCards(results, numberOfResults);
-                    //console.log(searchPresentationText);
+                    let results = getResults(response);
+                    createCardsHTML(results, resultType);
                 } else {
                     showMessage("Sem resultados!", "error");
                 }
+            },
+
+            error: function() {
+                showMessage("Erro ao comunicar com o servidor!", "error");
             }
         });
     });
 
 
     // clicar num ícone de favorito de um card
-    $(".cards-section").on("click", ".card .favorite-icon", function() {
+    $("#cards").on("click", ".card .favorite-icon", function() {
         let name = $(this).parent().children("h3").text();
 
         if (!favorites.includes(name)) {
             favorites = addFavorite(favorites, name);
             createFavoriteHTML(name, resultType);
-            numberOfFavorites = updateNumberOfFavorites("add");
+            increaseNumberOfFavorites();
         }
     });
 
@@ -152,19 +115,19 @@ $(document).ready(function() {
 
         favorites = removeFavorite(favorites, name);
         destroyFavoriteHTML(favorite_div);
-        numberOfFavorites = updateNumberOfFavorites("subtract");
+        decreaseNumberOfFavorites();
     });
 
 
     // clicar no botão de mostrar favoritos
     $(".btn-fav").click(function() {
-        document.getElementById("mySidenav").style.width = "300px";
+        $("#mySidenav").css("width", "300px");
     });
 
 
     // clicar no botão de esconder favoritos
     $(".closebtn").click(function() {
-        document.getElementById("mySidenav").style.width = "0";
+        $("#mySidenav").css("width", "0");
     });
 
 

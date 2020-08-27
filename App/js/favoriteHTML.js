@@ -12,10 +12,11 @@ class FavoriteHTML {
         this.h4_name.setAttribute("class", "title-fav");
         this.p_tag.setAttribute("class", "tags tags-fav");
         this.button_delete.setAttribute("class", "btn btn-del fas fa-trash-alt");
+
         this.h4_name.innerHTML = text;
         this.p_tag.innerHTML = text;
 
-        setTag(this.p_tag, type);
+        setTagHTML(this.p_tag, type);
     }
 
 

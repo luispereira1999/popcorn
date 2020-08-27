@@ -20,22 +20,59 @@ function showSlideshow() {
 }
 
 
+// desativar slideshow
+function removeSlideshow(slideshowId) {
+    clearTimeout(slideshowId);
+    $("section").remove("#slideshow");
+    return false;
+}
+
+
+// obter tipo de conteúdo da pesquisa
+function getContentType() {
+    let dropdown_content = document.getElementsByName("userSearch")[0];
+    let option_content = dropdown_content.options[dropdown_content.selectedIndex];
+    return option_content.value;
+}
+
+
+// obter texto da pesquisa
+function getSearchText(element) {
+    if (element.is("input")) {
+        var text = element.val();
+    } else if (element.is("h3")) {
+        var text = element.text();
+    }
+
+    return text;
+}
+
+
+// obter tipo de resultado da pesquisa
+function getResultType() {
+    let dropdown_result = document.getElementsByName("userFound")[0];
+    let option_result = dropdown_result.options[dropdown_result.selectedIndex];
+    return option_result.value;
+}
+
+
 // obter resultados da pesquisa
-function getResults(response, numberOfResults, results) {
+function getResults(response) {
     let result = {
         name: "",
         description: "",
         youtubeLink: "",
         wikipediaLink: "",
     };
+    let results = [];
 
-    for (let i = 0; i < numberOfResults; i++) {
-        result.name = response.Similar.Results[i].Name;
-        result.description = response.Similar.Results[i].wTeaser;
-        result.youtubeLink = response.Similar.Results[i].yUrl;
-        result.wikipediaLink = response.Similar.Results[i].wUrl;
+    response.Similar.Results.forEach(function(element) {
+        result.name = element.Name;
+        result.description = element.wTeaser;
+        result.youtubeLink = element.yUrl;
+        result.wikipediaLink = element.wUrl;
         results.push(JSON.parse(JSON.stringify(result)));
-    }
+    });
 
     return results;
 }
@@ -47,82 +84,24 @@ function getNumberOfResults(response) {
 }
 
 
-// definir cards quando a pesquisa é realizada
-function setCards(results, numberOfResults, resultType) {
-    // guarda os elementos de um card criado através da pesquisa
-    let card = {
-        div_card: null,
-        embed_youtube: null,
-        p_tag: null,
-        button_favorite: null,
-        i_favorite: null,
-        button_search: null,
-        i_search: null,
-        h3_name: null,
-        p_description: null,
-        p_wikipediaLink: null
-    };
-
-    // guarda todos os cards criados da pesquisa
-    let cards = [];
-
-    // é a div que contém todos os cards
-    let div_cards = document.getElementsByClassName("cards-section")[0];
-
-    for (let i = 0; i < numberOfResults; i++) {
-        // criar elementos
-        card.div_card = document.createElement("div");
-        card.embed_youtube = document.createElement("embed");
-        card.p_tag = document.createElement("p");
-        card.button_favorite = document.createElement("button");
-        card.i_favorite = document.createElement("i");
-        card.button_search = document.createElement("button");
-        card.i_search = document.createElement("i");
-        card.h3_name = document.createElement("h3");
-        card.p_description = document.createElement("p");
-        card.p_wikipediaLink = document.createElement("p");
-
-        // definir atributos dos elementos
-        card.div_card.setAttribute("id", "card-" + i);
-        card.div_card.setAttribute("class", "card card-elements");
-        card.embed_youtube.setAttribute("width", "300");
-        card.embed_youtube.setAttribute("height", "200");
-        card.embed_youtube.setAttribute("src", results[i].youtubeLink);
-        card.embed_youtube.setAttribute("class", "video-embed");
-        card.button_favorite.setAttribute("id", "favorite-icon-" + i);
-        card.button_favorite.setAttribute("class", "btn btn-card favorite-icon");
-        card.i_favorite.setAttribute("class", "far fa-star");
-        card.button_search.setAttribute("id", "search-icon-" + i);
-        card.button_search.setAttribute("class", "btn btn-card search-icon");
-        card.i_search.setAttribute("class", "fas fa-search");
-        card.p_wikipediaLink.setAttribute("class", "wiki");
-        card.p_wikipediaLink.setAttribute("target", "_blank");
-
-        // definir texto dos elementos
-        card.h3_name.innerHTML = results[i].name;
-        card.p_description.innerHTML = results[i].description;
-        setTag(card.p_tag, resultType);
-
-        // adicionar elementos ao DOM
-        card.div_card.appendChild(card.embed_youtube);
-        card.div_card.appendChild(card.button_favorite);
-        card.button_favorite.appendChild(card.i_favorite);
-        card.div_card.appendChild(card.button_search);
-        card.button_search.appendChild(card.i_search);
-        card.div_card.appendChild(card.h3_name);
-        card.div_card.appendChild(card.p_description);
-        card.div_card.appendChild(card.p_wikipediaLink);
-        card.div_card.appendChild(card.p_tag);
-        div_cards.appendChild(card.div_card);
-
-        // adicionar card ao array de cards
-        cards.push(card);
-    }
+// criar elementos HTML dos cards
+function createCardsHTML(array, tagName) {
+    array.forEach(function(element) {
+        let card = new CardHTML();
+        card.setAttributes(element, tagName);
+        card.addToDOM();
+    });
 }
 
 
-// definir tag
-function setTag(element, type) {
+// destruir elementos HTML dos cards
+function destroyCardsHTML() {
+    $(".card").remove();
+}
+
+
+// definir atributos do elemento HTML da tag
+function setTagHTML(element, type) {
     if (type === "music") {
         element.setAttribute("class", "tags tags-musicas");
         element.innerHTML = "Música";
@@ -155,31 +134,6 @@ function addFavorite(array, element) {
 }
 
 
-// criar elementos HTML do favorito
-function createFavoriteHTML(text, type) {
-    let favorite = new FavoriteHTML();
-    favorite.setAttributes(text, type);
-    favorite.addToDOM();
-}
-
-
-// atualizar número de favoritos
-function updateNumberOfFavorites(operation) {
-    let currentLength = document.getElementById("numberOfFavorites").innerHTML;
-
-    if (operation == "add") {
-        currentLength = parseInt(currentLength);
-        currentLength += 1;
-    } else if (operation == "subtract") {
-        currentLength = parseInt(currentLength);
-        currentLength -= 1;
-    }
-
-    document.getElementById("numberOfFavorites").innerHTML = currentLength;
-    return currentLength;
-}
-
-
 // remover favorito
 function removeFavorite(array, element) {
     return array = $.grep(array, function(value) {
@@ -188,9 +142,37 @@ function removeFavorite(array, element) {
 }
 
 
+// criar elementos HTML do favorito
+function createFavoriteHTML(text, type) {
+    let favorite = new FavoriteHTML();
+    favorite.setAttributes(text, type);
+    favorite.addToDOM();
+}
+
+
 // destruir elementos HTML do favorito
 function destroyFavoriteHTML(element) {
-    $(element).remove();
+    element.remove();
+}
+
+
+// adicionar número de favoritos
+function increaseNumberOfFavorites() {
+    let currentLength = document.getElementById("numberOfFavorites").innerHTML;
+    currentLength = parseInt(currentLength);
+    currentLength += 1;
+
+    document.getElementById("numberOfFavorites").innerHTML = currentLength;
+}
+
+
+// subtrair número de favoritos
+function decreaseNumberOfFavorites() {
+    let currentLength = document.getElementById("numberOfFavorites").innerHTML;
+    currentLength = parseInt(currentLength);
+    currentLength -= 1;
+
+    document.getElementById("numberOfFavorites").innerHTML = currentLength;
 }
 
 

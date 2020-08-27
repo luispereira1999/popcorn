@@ -79,7 +79,7 @@ p {
     justify-content: center;
 }
 
-.text-search {
+#textSearch {
     padding: 10px 14px;
     font-size: 13px;
     background-color: #252525;
@@ -155,7 +155,7 @@ select:focus {
 
 /**** CARDS ****/
 
-.cards-section {
+#cards {
     display: grid;
     padding: 40px;
 }
@@ -453,7 +453,7 @@ select:focus {
         align-items: center;
     }
     .foundSearch,
-    .text-search,
+    #textSearch,
     .userSearch,
     .btn-search {
         width: 100% !important;
