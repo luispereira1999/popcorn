@@ -1,6 +1,5 @@
 let slideIndex = 0;
 let slideshowIsActive = true;
-let slideshowId = 0;
 
 let contentType = "";
 let resultType = "";
@@ -10,7 +9,7 @@ let favorites = [];
 
 $(document).ready(function() {
     // iniciar slideshow ao carregar a página
-    slideshowId = showSlideshow(slideshowIsActive);
+    let slideshowId = showSlideshow(slideshowIsActive);
 
 
     // clicar no botão para a pesquisa principal
@@ -39,7 +38,8 @@ $(document).ready(function() {
                     if (numberOfResults > 0) {
                         // ao fazer a pesquisa pela primeira vez, remove o slideshow
                         if (slideshowIsActive) {
-                            slideshowIsActive = removeSlideshow(slideshowId);
+                            slideshowIsActive = disableSlideshow(slideshowId);
+                            removeSlideshow();
                         }
 
                         let results = getResults(response);
@@ -59,12 +59,11 @@ $(document).ready(function() {
     });
 
 
-    // clicar num botão de pesquisa num card
+    // clicar no botão de pesquisa em um card
     $("#cards").on("click", ".card .search-icon", function(e) {
         e.preventDefault();
 
         let searchText = getSearchText($(this).parent().children("h3"));
-
         destroyCardsHTML();
 
         let domain = "https://tastedive.com/api/similar";
@@ -96,7 +95,7 @@ $(document).ready(function() {
     });
 
 
-    // clicar num ícone de favorito de um card
+    // clicar no ícone de favorito em um card
     $("#cards").on("click", ".card .favorite-icon", function() {
         let name = $(this).parent().children("h3").text();
 
@@ -108,7 +107,7 @@ $(document).ready(function() {
     });
 
 
-    // clicar num botão de remover favorito
+    // clicar no botão de remover favorito
     $("#favorites").on("click", ".favorite .btn-del", function() {
         let name = $(this).parent().children("h4").text();
         let favorite_div = $(this).parent();
@@ -119,25 +118,25 @@ $(document).ready(function() {
     });
 
 
-    // clicar no botão de mostrar favoritos
+    // clicar no botão de mostrar a lista favoritos
     $(".btn-fav").click(function() {
         $("#mySidenav").css("width", "300px");
     });
 
 
-    // clicar no botão de esconder favoritos
+    // clicar no botão de esconder a lista favoritos
     $(".closebtn").click(function() {
-        $("#mySidenav").css("width", "0");
+        $("#mySidenav").css("width", "0px");
     });
 
 
-    // clicar no botão para exportar para JSON
+    // clicar no botão para exportar favoritos para JSON
     $(".export").click(function() {
         console.log(JSON.stringify(favorites));
     });
 
 
-    // clicar no botão de ir para o topo da página
+    // clicar no botão para ir para o topo da página
     $(".btn-up").click(function() {
         $("html, body").animate({ scrollTop: 0 }, 1000);
     });

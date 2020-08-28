@@ -1,3 +1,5 @@
+/**** GLOBAL ****/
+
 * {
     font-family: 'Roboto', sans-serif;
     font-family: 'Kulim Park', sans-serif;
@@ -24,7 +26,7 @@ p {
 }
 
 
-/**** BUTTONS - main configuration ****/
+/**** BOTÕES ****/
 
 .btn {
     padding: 10px 14px;
@@ -37,7 +39,7 @@ p {
 }
 
 
-/**** NAVIGATION BAR ****/
+/**** CABEÇALHO ****/
 
 .navigation-bar {
     overflow: hidden;
@@ -71,7 +73,7 @@ p {
 }
 
 
-/**** SEARCH ****/
+/**** PESQUISA ****/
 
 .search-form {
     display: flex;
@@ -153,7 +155,7 @@ select:focus {
 }
 
 
-/**** CARDS ****/
+/**** RESULTADOS DA PESQUISA ****/
 
 #cards {
     display: grid;
@@ -280,7 +282,7 @@ select:focus {
 }
 
 
-/**** FOOTER ****/
+/**** RODAPÉ ****/
 
 .footer-section {
     background-color: #1F1F1F;
@@ -340,7 +342,7 @@ select:focus {
 }
 
 
-/**** ICONS ****/
+/**** ÍCONES ****/
 
 .fa-star {
     color: white;
@@ -357,7 +359,7 @@ select:focus {
 }
 
 
-/**** SIDENAV ****/
+/**** FAVORITOS ****/
 
 .sidenav {
     height: 100%;
@@ -383,6 +385,7 @@ select:focus {
 
 .sidenav a:hover {
     color: #f1f1f1;
+    cursor: pointer;
 }
 
 .sidenav .closebtn {
@@ -436,6 +439,9 @@ select:focus {
     height: 35%;
 }
 
+
+/**** PARA TABLETS ****/
+
 @media screen and (max-height: 450px) {
     .sidenav {
         padding-top: 15px;
@@ -445,8 +451,10 @@ select:focus {
     }
 }
 
+
+/**** PARA SMARTPHONES ****/
+
 @media only screen and (max-width:620px) {
-    /* For mobile phones: */
     #search form {
         display: flex;
         flex-wrap: wrap;

@@ -34,18 +34,21 @@
 </head>
 
 <body>
+    <!-- CABEÇALHO -->
     <nav class="navigation-bar">
         <img src="images/logo.png">
         <h3>PopCorn</h3>
         <button class="btn btn-fav"><i class="far fa-star"></i> <span id="numberOfFavorites">0</span></button>
     </nav>
 
+    <!-- FAVORITOS -->
     <section id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn">&times;</a>
+        <a class="closebtn">&times;</a>
         <div id="favorites"></div>
         <button class="export">Exportar favoritos</button>
     </section>
 
+    <!-- PESQUISA -->
     <section id="search">
         <form class="search-form" action="#" method="get" accept-charset="utf-8">
             <select id="userSearch" required>
@@ -75,6 +78,7 @@
         </form>
     </section>
 
+    <!-- SLIDESHOW -->
     <section id="slideshow">
         <img class="mySlides" src="images/1.png">
         <img class="mySlides" src="images/2.png">
@@ -82,8 +86,10 @@
         <img class="mySlides" src="images/4.png">
     </section>
 
+    <!-- RESULTADOS DA PESQUISA -->
     <section id="cards"></section>
 
+    <!-- RODAPÉ -->
     <footer class="footer-section">
         <div class="first-footer"></div>
         <div class="second-footer">

@@ -7,17 +7,19 @@ class FavoriteHTML {
     }
 
 
-    setAttributes(text, type) {
+    // definir atributos dos elementos HTML
+    setAttributes(title, tagName) {
         this.div_favorite.addClass("favorite");
         this.h4_name.addClass("title-fav");
-        this.h4_name.text(text);
+        this.h4_name.text(title);
         this.p_tag.addClass("tags tags-fav");
         this.button_delete.addClass("btn btn-del fas fa-trash-alt");
 
-        setTagHTML(this.p_tag, type);
+        setTagHTML(this.p_tag, tagName);
     }
 
 
+    // adicionar elementos HTML ao DOM
     addToDOM() {
         let div_favorites = $("#favorites");
 

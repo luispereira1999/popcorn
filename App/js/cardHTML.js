@@ -13,11 +13,12 @@ class CardHTML {
     }
 
 
+    // definir atributos dos elementos HTML
     setAttributes(result, tagName) {
         this.div_card.addClass("card card-elements");
         this.embed_youtube.addClass("video-embed");
-        this.embed_youtube.attr("width", "300");
-        this.embed_youtube.attr("height", "200");
+        this.embed_youtube.attr("width", "300px");
+        this.embed_youtube.attr("height", "200px");
         this.embed_youtube.attr("src", result.youtubeLink);
         this.button_favorite.addClass("btn btn-card favorite-icon");
         this.i_favorite.addClass("far fa-star");
@@ -32,6 +33,7 @@ class CardHTML {
     }
 
 
+    // adicionar elementos HTML ao DOM
     addToDOM() {
         let div_cards = $("#cards");
 

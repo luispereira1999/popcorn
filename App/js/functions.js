@@ -21,21 +21,26 @@ function showSlideshow() {
 
 
 // desativar slideshow
-function removeSlideshow(slideshowId) {
+function disableSlideshow(slideshowId) {
     clearTimeout(slideshowId);
-    $("section").remove("#slideshow");
     return false;
 }
 
 
-// obter tipo de conteúdo da pesquisa
+// remover slideshow
+function removeSlideshow() {
+    $("section").remove("#slideshow");
+}
+
+
+// obter tipo de conteúdo a procurar na pesquisa
 function getContentType() {
     let text = $("#userSearch option:selected").val();
     return text;
 }
 
 
-// obter texto da pesquisa
+// obter texto a ser pesquisado
 function getSearchText(element) {
     if (element.is("input")) {
         var text = element.val();
@@ -47,7 +52,7 @@ function getSearchText(element) {
 }
 
 
-// obter tipo de resultado da pesquisa
+// obter tipo de resultado a encontrar na pesquisa
 function getResultType() {
     let text = $("#userFound option:selected").val();
     return text;
@@ -125,14 +130,14 @@ function setTagHTML(element, type) {
 }
 
 
-// adicionar favorito
+// adicionar favorito ao array de favoritos
 function addFavorite(array, element) {
     array.push(element);
     return array;
 }
 
 
-// remover favorito
+// remover favorito do array de favoritos
 function removeFavorite(array, element) {
     return array = $.grep(array, function(value) {
         return value != element;
@@ -141,9 +146,9 @@ function removeFavorite(array, element) {
 
 
 // criar elementos HTML do favorito
-function createFavoriteHTML(text, type) {
+function createFavoriteHTML(title, tag) {
     let favorite = new FavoriteHTML();
-    favorite.setAttributes(text, type);
+    favorite.setAttributes(title, tag);
     favorite.addToDOM();
 }
 
@@ -154,23 +159,23 @@ function destroyFavoriteHTML(element) {
 }
 
 
-// adicionar número de favoritos
+// aumentar o número de favoritos
 function increaseNumberOfFavorites() {
-    let currentLength = $("#numberOfFavorites").text();
-    currentLength = parseInt(currentLength);
-    currentLength += 1;
+    let currentNumber = $("#numberOfFavorites").text();
+    currentNumber = parseInt(currentNumber);
+    currentNumber += 1;
 
-    $("#numberOfFavorites").text(currentLength);
+    $("#numberOfFavorites").text(currentNumber);
 }
 
 
-// subtrair número de favoritos
+// diminuir o número de favoritos
 function decreaseNumberOfFavorites() {
-    let currentLength = $("#numberOfFavorites").text();
-    currentLength = parseInt(currentLength);
-    currentLength -= 1;
+    let currentNumber = $("#numberOfFavorites").text();
+    currentNumber = parseInt(currentNumber);
+    currentNumber -= 1;
 
-    $("#numberOfFavorites").text(currentLength);
+    $("#numberOfFavorites").text(currentNumber);
 }
 
 
