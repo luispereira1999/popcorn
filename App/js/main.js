@@ -1,8 +1,8 @@
 let slideIndex = 0;
 let slideshowIsActive = true;
 
-let contentType = "";
-let resultType = "";
+let searchContentType = "";
+let searchResultType = "";
 
 let favorites = [];
 
@@ -16,21 +16,22 @@ $(document).ready(function() {
     $(".btn-search").click(function(e) {
         e.preventDefault();
 
-        contentType = getContentType();
-        let searchText = getSearchText($("#textSearch"));
-        resultType = getResultType();
+        searchContentType = getContentType();
+        let textToSearch = getInputText();
+        searchResultType = getResultType();
 
-        if (contentType != "" && searchText != "" && resultType != "") {
-            let domain = "https://tastedive.com/api/similar";
+        if (searchContentType != "" && textToSearch != "" && searchResultType != "") {
+            // URL para fazer a chamada à API
             let apiKey = "382610-popcorn-40K5FW57";
-            let encodedText = encodeURIComponent(contentType + ":" + searchText);
+            let searchQuery = encodeURIComponent(searchContentType + ":" + textToSearch);
+            let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&info=1&limit=3";
 
-            // fazer pedido à API
+            // fazer chamada à API
             $.ajax({
                 dataType: "jsonp",
                 jsonp: "callback",
-                type: "post",
-                url: domain + "?k=" + apiKey + "&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
+                type: "get",
+                url: url,
 
                 success: function(response) {
                     let numberOfResults = getNumberOfResults(response);
@@ -43,7 +44,7 @@ $(document).ready(function() {
                         }
 
                         let results = getResults(response);
-                        createCardsHTML(results, resultType);
+                        createCardsHTML(results, searchResultType);
                     } else {
                         showMessage("Sem resultados!", "error");
                     }
@@ -63,26 +64,29 @@ $(document).ready(function() {
     $("#cards").on("click", ".card .search-icon", function(e) {
         e.preventDefault();
 
-        let searchText = getSearchText($(this).parent().children("h3"));
+        let h3_card = $(this).parent().children("h3");
+        let textToSearch = getTitleText(h3_card);
+        // remover cards da pesquisa anterior
         destroyCardsHTML();
 
-        let domain = "https://tastedive.com/api/similar";
+        // URL para fazer a chamada à API
         let apiKey = "382610-popcorn-40K5FW57";
-        let encodedText = encodeURIComponent(contentType + ":" + searchText);
+        let searchQuery = searchContentType + ":" + textToSearch;
+        let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&info=1&limit=3";
 
-        // fazer pedido à API
+        // fazer chamada à API
         $.ajax({
             dataType: "jsonp",
             jsonp: "callback",
-            type: "post",
-            url: domain + "?k=" + apiKey + "&q=" + encodedText + "&info=1&limit=3&type=" + resultType,
+            type: "get",
+            url: url,
 
             success: function(response) {
                 let numberOfResults = getNumberOfResults(response);
 
                 if (numberOfResults > 0) {
                     let results = getResults(response);
-                    createCardsHTML(results, resultType);
+                    createCardsHTML(results, searchResultType);
                 } else {
                     showMessage("Sem resultados!", "error");
                 }
@@ -97,11 +101,11 @@ $(document).ready(function() {
 
     // clicar no ícone de favorito em um card
     $("#cards").on("click", ".card .favorite-icon", function() {
-        let name = $(this).parent().children("h3").text();
+        let title = $(this).parent().children("h3").text();
 
-        if (!favorites.includes(name)) {
-            favorites = addFavorite(favorites, name);
-            createFavoriteHTML(name, resultType);
+        if (!favorites.includes(title)) {
+            favorites = addFavorite(favorites, title);
+            createFavoriteHTML(title, searchResultType);
             increaseNumberOfFavorites();
         }
     });
@@ -109,10 +113,10 @@ $(document).ready(function() {
 
     // clicar no botão de remover favorito
     $("#favorites").on("click", ".favorite .btn-del", function() {
-        let name = $(this).parent().children("h4").text();
+        let title = $(this).parent().children("h4").text();
         let favorite_div = $(this).parent();
 
-        favorites = removeFavorite(favorites, name);
+        favorites = removeFavorite(favorites, title);
         destroyFavoriteHTML(favorite_div);
         decreaseNumberOfFavorites();
     });

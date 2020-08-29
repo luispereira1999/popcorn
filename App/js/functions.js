@@ -40,18 +40,6 @@ function getContentType() {
 }
 
 
-// obter texto a ser pesquisado
-function getSearchText(element) {
-    if (element.is("input")) {
-        var text = element.val();
-    } else if (element.is("h3")) {
-        var text = element.text();
-    }
-
-    return text;
-}
-
-
 // obter tipo de resultado a encontrar na pesquisa
 function getResultType() {
     let text = $("#userFound option:selected").val();
@@ -59,10 +47,22 @@ function getResultType() {
 }
 
 
+// obter texto do input
+function getInputText() {
+    return $("#textSearch").val();
+}
+
+
+// obter texto do título do card
+function getTitleText(element) {
+    return element.text();
+}
+
+
 // obter resultados da pesquisa
 function getResults(response) {
     let result = {
-        name: "",
+        title: "",
         description: "",
         youtubeLink: "",
         wikipediaLink: "",
@@ -70,7 +70,7 @@ function getResults(response) {
     let results = [];
 
     response.Similar.Results.forEach(function(element) {
-        result.name = element.Name;
+        result.title = element.Name;
         result.description = element.wTeaser;
         result.youtubeLink = element.yUrl;
         result.wikipediaLink = element.wUrl;
@@ -88,10 +88,12 @@ function getNumberOfResults(response) {
 
 
 // criar elementos HTML dos cards
-function createCardsHTML(array, tagName) {
-    array.forEach(function(element) {
+function createCardsHTML(results, searchResultType) {
+    results.forEach(function(currentResult) {
         let card = new CardHTML();
-        card.setAttributes(element, tagName);
+        card.setAttributes(currentResult);
+        card.setText(currentResult.title, currentResult.description);
+        card.createTagHTML(searchResultType);
         card.addToDOM();
     });
 }
@@ -99,34 +101,7 @@ function createCardsHTML(array, tagName) {
 
 // destruir elementos HTML dos cards
 function destroyCardsHTML() {
-    $(".card").remove();
-}
-
-
-// definir atributos do elemento HTML da tag
-function setTagHTML(element, type) {
-    if (type === "music") {
-        element.addClass("tags tags-musicas");
-        element.text("Música");
-    } else if (type === "movies") {
-        element.addClass("tags tags-filmes");
-        element.text("Filme");
-    } else if (type === "shows") {
-        element.addClass("tags tags-series");
-        element.text("Série");
-    } else if (type === "books") {
-        element.addClass("tags tags-livros");
-        element.text("Livro");
-    } else if (type === "authors") {
-        element.addClass("tags tags-autores");
-        element.text("Autor");
-    } else if (type === "games") {
-        element.addClass("tags tags-jogos");
-        element.text("Jogo");
-    } else if (type === "podcasts") {
-        element.addClass("tags tags-podcasts");
-        element.text("Podcast");
-    }
+    $("#cards").children(".card").remove();
 }
 
 
@@ -146,9 +121,11 @@ function removeFavorite(array, element) {
 
 
 // criar elementos HTML do favorito
-function createFavoriteHTML(title, tag) {
+function createFavoriteHTML(title, searchResultType) {
     let favorite = new FavoriteHTML();
-    favorite.setAttributes(title, tag);
+    favorite.setAttributes();
+    favorite.setText(title);
+    favorite.createTagHTML(searchResultType);
     favorite.addToDOM();
 }
 
