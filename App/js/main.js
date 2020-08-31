@@ -1,4 +1,4 @@
-let slideIndex = 0;
+let imageIndex = 0;
 let slideshowIsActive = true;
 
 let searchContentType = "";
@@ -9,22 +9,21 @@ let favorites = [];
 
 $(document).ready(function() {
     // iniciar slideshow ao carregar a página
-    let slideshowId = showSlideshow(slideshowIsActive);
-
+    let slideshowId = showSlideshow();
 
     // clicar no botão para a pesquisa principal
     $(".btn-search").click(function(e) {
         e.preventDefault();
 
-        searchContentType = getContentType();
+        searchContentType = getSearchContentOption();
         let textToSearch = getInputText();
-        searchResultType = getResultType();
+        searchResultType = getSearchResultOption();
 
         if (searchContentType != "" && textToSearch != "" && searchResultType != "") {
             // URL para fazer a chamada à API
             let apiKey = "382610-popcorn-40K5FW57";
             let searchQuery = encodeURIComponent(searchContentType + ":" + textToSearch);
-            let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&info=1&limit=3";
+            let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&info=1&limit=6";
 
             // fazer chamada à API
             $.ajax({
@@ -61,7 +60,7 @@ $(document).ready(function() {
 
 
     // clicar no botão de pesquisa em um card
-    $("#cards").on("click", ".card .search-icon", function(e) {
+    $(".cards").on("click", ".card .search-icon", function(e) {
         e.preventDefault();
 
         let h3_card = $(this).parent().children("h3");
@@ -72,7 +71,7 @@ $(document).ready(function() {
         // URL para fazer a chamada à API
         let apiKey = "382610-popcorn-40K5FW57";
         let searchQuery = searchContentType + ":" + textToSearch;
-        let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&info=1&limit=3";
+        let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&info=1&limit=6";
 
         // fazer chamada à API
         $.ajax({
@@ -100,42 +99,47 @@ $(document).ready(function() {
 
 
     // clicar no ícone de favorito em um card
-    $("#cards").on("click", ".card .favorite-icon", function() {
+    $(".cards").on("click", ".card .favorite-icon", function() {
         let title = $(this).parent().children("h3").text();
 
         if (!favorites.includes(title)) {
             favorites = addFavorite(favorites, title);
             createFavoriteHTML(title, searchResultType);
-            increaseNumberOfFavorites();
+
+            let numberOfFavorites = getNumberOfFavorites();
+            numberOfFavorites = increaseNumberOfFavorites(numberOfFavorites);
+            updateNumberOfFavoritesOnPage(numberOfFavorites);
         }
     });
 
 
     // clicar no botão de remover favorito
-    $("#favorites").on("click", ".favorite .btn-del", function() {
+    $(".favorites-items").on("click", ".favorite .btn-del", function() {
         let title = $(this).parent().children("h4").text();
-        let favorite_div = $(this).parent();
-
+        let div_favorite = $(this).parent();
         favorites = removeFavorite(favorites, title);
-        destroyFavoriteHTML(favorite_div);
-        decreaseNumberOfFavorites();
+        destroyFavoriteHTML(div_favorite);
+
+        let numberOfFavorites = getNumberOfFavorites();
+        numberOfFavorites = decreaseNumberOfFavorites(numberOfFavorites);
+        updateNumberOfFavoritesOnPage(numberOfFavorites);
     });
 
 
     // clicar no botão de mostrar a lista favoritos
-    $(".btn-fav").click(function() {
-        $("#mySidenav").css("width", "300px");
+    $(".btn-open").click(function() {
+        $(".favorites").css("width", "300px");
     });
 
 
     // clicar no botão de esconder a lista favoritos
-    $(".closebtn").click(function() {
-        $("#mySidenav").css("width", "0px");
+    $(".btn-close").click(function() {
+        $(".favorites").css("width", "0px");
     });
 
 
     // clicar no botão para exportar favoritos para JSON
-    $(".export").click(function() {
+    $(".favorites-export").click(function() {
         console.log(JSON.stringify(favorites));
     });
 

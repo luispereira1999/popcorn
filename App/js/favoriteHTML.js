@@ -10,7 +10,7 @@ class FavoriteHTML {
     // definir atributos dos elementos HTML
     setAttributes() {
         this.div_favorite.addClass("favorite");
-        this.h4_title.addClass("title-fav");
+        this.h4_title.addClass("favorites-title");
         this.p_tag.addClass("tags tags-fav");
         this.button_delete.addClass("btn btn-del fas fa-trash-alt");
     }
@@ -30,9 +30,9 @@ class FavoriteHTML {
     }
 
 
-    // adicionar elementos HTML ao DOM
-    addToDOM() {
-        let div_favorites = $("#favorites");
+    // adicionar elementos HTML à página
+    addToPage() {
+        let div_favorites = $(".favorites-items");
 
         this.div_favorite.append(this.h4_title);
         this.div_favorite.append(this.p_tag);

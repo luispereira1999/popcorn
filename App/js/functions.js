@@ -1,22 +1,47 @@
 // mostrar slideshow
 function showSlideshow() {
-    let slides = $(".mySlides");
-    if (slides.length == 0) {
+    let images = $(".slideshow-image");
+    let numberOfImages = images.length;
+
+    if (numberOfImages == 0) {
         return;
     }
 
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    hideAllImages(images, numberOfImages);
+    imageIndex = getIndexOfNextImage(imageIndex);
+    if (imageIndex > numberOfImages) {
+        imageIndex = restartSlideshow();
     }
 
-    slideIndex++;
-    if (slideIndex > slides.length) {
-        slideIndex = 1;
-    }
-    slides[slideIndex - 1].style.display = "block";
-
-    // a imagem muda num espaço de 4 segundos
+    showImage(images, imageIndex);
+    // imagem muda a cada 4 segundos
     return setTimeout(showSlideshow, 4000);
+}
+
+
+// esconder todas as imagens
+function hideAllImages(images, numberOfImages) {
+    for (let i = 0; i < numberOfImages; i++) {
+        images.eq(i).css("display", "none");
+    }
+}
+
+
+// reiniciar slideshow
+function restartSlideshow() {
+    return 0;
+}
+
+
+// obter índice da próxima imagem
+function getIndexOfNextImage(imageIndex) {
+    return imageIndex += 1;
+}
+
+
+// mostrar imagem atual do slideshow
+function showImage(images, imageIndex) {
+    images.eq(imageIndex - 1).css("display", "block");
 }
 
 
@@ -29,27 +54,27 @@ function disableSlideshow(slideshowId) {
 
 // remover slideshow
 function removeSlideshow() {
-    $("section").remove("#slideshow");
+    $("section").remove(".slideshow");
 }
 
 
-// obter tipo de conteúdo a procurar na pesquisa
-function getContentType() {
-    let text = $("#userSearch option:selected").val();
+// obter opção do tipo de conteúdo a procurar na pesquisa
+function getSearchContentOption() {
+    let text = $(".search-content option:selected").val();
     return text;
 }
 
 
-// obter tipo de resultado a encontrar na pesquisa
-function getResultType() {
-    let text = $("#userFound option:selected").val();
+// obter opção do tipo de resultado a encontrar na pesquisa
+function getSearchResultOption() {
+    let text = $(".search-result option:selected").val();
     return text;
 }
 
 
 // obter texto do input
 function getInputText() {
-    return $("#textSearch").val();
+    return $(".search-text").val();
 }
 
 
@@ -94,28 +119,29 @@ function createCardsHTML(results, searchResultType) {
         card.setAttributes(currentResult);
         card.setText(currentResult.title, currentResult.description);
         card.createTagHTML(searchResultType);
-        card.addToDOM();
+        card.addToPage();
     });
 }
 
 
 // destruir elementos HTML dos cards
 function destroyCardsHTML() {
-    $("#cards").children(".card").remove();
+    $(".cards").children(".card").remove();
 }
 
 
 // adicionar favorito ao array de favoritos
-function addFavorite(array, element) {
-    array.push(element);
-    return array;
+function addFavorite(favorites, title) {
+    favorites.push(title);
+    return favorites;
 }
 
 
 // remover favorito do array de favoritos
-function removeFavorite(array, element) {
-    return array = $.grep(array, function(value) {
-        return value != element;
+function removeFavorite(favorites, title) {
+    return favorites = $.grep(favorites, function(currentItem) {
+        // retorna todos os ítens que são diferentes de "title"
+        return currentItem != title;
     });
 }
 
@@ -126,7 +152,7 @@ function createFavoriteHTML(title, searchResultType) {
     favorite.setAttributes();
     favorite.setText(title);
     favorite.createTagHTML(searchResultType);
-    favorite.addToDOM();
+    favorite.addToPage();
 }
 
 
@@ -136,23 +162,30 @@ function destroyFavoriteHTML(element) {
 }
 
 
-// aumentar o número de favoritos
-function increaseNumberOfFavorites() {
-    let currentNumber = $("#numberOfFavorites").text();
-    currentNumber = parseInt(currentNumber);
-    currentNumber += 1;
+// obter o número de favoritos 
+function getNumberOfFavorites() {
+    let currentNumber = $(".header-number-favorites").text();
+    return currentNumber;
+}
 
-    $("#numberOfFavorites").text(currentNumber);
+
+// aumentar o número de favoritos na página
+function increaseNumberOfFavorites(currentNumber) {
+    currentNumber = parseInt(currentNumber);
+    return currentNumber += 1;
 }
 
 
 // diminuir o número de favoritos
-function decreaseNumberOfFavorites() {
-    let currentNumber = $("#numberOfFavorites").text();
+function decreaseNumberOfFavorites(currentNumber) {
     currentNumber = parseInt(currentNumber);
-    currentNumber -= 1;
+    return currentNumber -= 1;
+}
 
-    $("#numberOfFavorites").text(currentNumber);
+
+// atualizar o número de favoritos na página
+function updateNumberOfFavoritesOnPage(number) {
+    $(".header-number-favorites").text(number);
 }
 
 

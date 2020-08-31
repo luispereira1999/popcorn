@@ -11,7 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/logo.png">
 
     <!-- CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Kulim+Park|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Indie+Flower|Kulim+Park|Roboto&display=swap">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
 
     <!-- JQuery -->
@@ -21,8 +21,8 @@
     <script type="text/javascript" defer src="js/main.js"></script>
     <script type="text/javascript" defer src="js/functions.js"></script>
     <script type="text/javascript" defer src="js/cardHTML.js"></script>
-    <script type="text/javascript" defer src="js/tagHTML.js"></script>
     <script type="text/javascript" defer src="js/favoriteHTML.js"></script>
+    <script type="text/javascript" defer src="js/tagHTML.js"></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
@@ -36,23 +36,23 @@
 
 <body>
     <!-- CABEÇALHO -->
-    <nav class="navigation-bar">
+    <nav class="header">
         <img src="images/logo.png">
         <h3>PopCorn</h3>
-        <button class="btn btn-fav"><i class="far fa-star"></i> <span id="numberOfFavorites">0</span></button>
+        <button class="btn btn-open"><i class="far fa-star"></i> <span class="header-number-favorites">0</span></button>
     </nav>
 
     <!-- FAVORITOS -->
-    <section id="mySidenav" class="sidenav">
-        <a class="closebtn">&times;</a>
-        <div id="favorites"></div>
-        <button class="export">Exportar favoritos</button>
+    <section class="favorites">
+        <a class="btn-close"><i class="fas fa-times"></i></a>
+        <div class="favorites-items"></div>
+        <button class="favorites-export">Exportar favoritos</button>
     </section>
 
     <!-- PESQUISA -->
-    <section id="search">
+    <section class="search">
         <form class="search-form" action="#" method="get" accept-charset="utf-8">
-            <select id="userSearch" required>
+            <select class="search-content" required>
 				<option value="" disabled selected hidden>Escolha pelo que vai procurar</option>
 				<option value="music">Música</option>
 				<option value="movie">Filme</option>
@@ -63,9 +63,9 @@
 				<option value="podcast">Podcast</option>
             </select>
 
-            <input type="text" name="search field" placeholder="Música, Filmes, Séries, Livros, Autores, Jogos ou Podcasts" id="textSearch" />
+            <input type="text" name="search field" placeholder="Música, Filmes, Séries, Livros, Autores, Jogos ou Podcasts" class="search-text" />
 
-            <select id="userFound" required>
+            <select class="search-result" required>
 				<option value="" disabled selected hidden>Escolha o que deseja encontrar</option>
 				<option value="music">Músicas</option>
 				<option value="movies">Filmes</option>
@@ -81,23 +81,23 @@
     </section>
 
     <!-- SLIDESHOW -->
-    <section id="slideshow">
-        <img class="mySlides" src="images/1.png">
-        <img class="mySlides" src="images/2.png">
-        <img class="mySlides" src="images/3.png">
-        <img class="mySlides" src="images/4.png">
+    <section class="slideshow">
+        <img class="slideshow-image" src="images/1.png">
+        <img class="slideshow-image" src="images/2.png">
+        <img class="slideshow-image" src="images/3.png">
+        <img class="slideshow-image" src="images/4.png">
     </section>
 
     <!-- RESULTADOS DA PESQUISA -->
-    <section id="cards"></section>
+    <section class="cards"></section>
 
     <!-- RODAPÉ -->
-    <footer class="footer-section">
-        <div class="first-footer"></div>
-        <div class="second-footer">
+    <footer class="footer">
+        <div class="footer-first"></div>
+        <div class="footer-second">
             <p>PopCorn © 2020</p>
         </div>
-        <div class="third-footer">
+        <div class="footer-third">
             <button class="btn btn-up"><i class="fas fa-chevron-up"></i></button>
         </div>
     </footer>

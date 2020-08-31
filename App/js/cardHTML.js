@@ -45,8 +45,8 @@ class CardHTML {
 
 
     // adicionar elementos HTML à página
-    addToDOM() {
-        let div_cards = $("#cards");
+    addToPage() {
+        let div_cards = $(".cards");
 
         this.div_card.append(this.embed_youtube);
         this.div_card.append(this.button_favorite);
