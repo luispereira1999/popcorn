@@ -1,0 +1,485 @@
+/**** GLOBAL ****/
+
+* {
+   font-family: 'Roboto', sans-serif;
+   font-family: 'Kulim Park', sans-serif;
+}
+
+body {
+   margin: 0;
+   background-color: #121212;
+}
+
+h1,
+h2,
+h3,
+h4 {
+   font-family: 'Kulim Park', sans-serif;
+   color: #f2f2f2;
+   text-align: center;
+}
+
+p {
+   font-family: 'Roboto', sans-serif;
+   color: #f2f2f2;
+   text-align: justify;
+}
+
+
+/**** CABEÇALHO ****/
+
+.header {
+   overflow: hidden;
+   background-color: #1F1F1F;
+}
+
+.header img {
+   width: 50px;
+   height: 50px;
+   float: left;
+}
+
+.header h3 {
+   display: inline-block;
+   padding: 14px 16px;
+   text-decoration: none;
+   margin: 0;
+}
+
+
+/**** FAVORITOS ****/
+
+.favorites {
+   height: 100%;
+   width: 0;
+   position: fixed;
+   z-index: 1;
+   top: 0;
+   right: 0;
+   background-color: #111;
+   overflow-x: hidden;
+   transition: 0.5s;
+   padding-top: 60px;
+}
+
+.favorites a {
+   padding: 8px 8px 8px 32px;
+   text-decoration: none;
+   font-size: 25px;
+   color: #818181;
+   display: block;
+   transition: 0.3s;
+}
+
+.favorites a:hover {
+   color: #f1f1f1;
+   cursor: pointer;
+}
+
+.favorites-items {
+   height: 100%;
+   width: 100%;
+   padding: 10px;
+   border-radius: 4px;
+   background-color: #313131;
+   margin: 4px;
+}
+
+.row:after {
+   content: "";
+   display: table;
+   clear: both;
+}
+
+.favorites-div {
+   border-radius: 4px;
+   background-color: #313131;
+   margin: 4px;
+   padding: 4px;
+   width: 100%;
+   position: flex;
+}
+
+.favorite-title {
+   text-align: center;
+}
+
+.favorites-div-items {
+   width: 70%;
+}
+
+.favorites-div img {
+   width: 30%;
+   height: 35%;
+}
+
+
+/**** PESQUISA ****/
+
+.search-form {
+   display: flex;
+   margin: 10px 0;
+   justify-content: center;
+}
+
+.search-content {
+   background-color: #252525;
+   border: unset;
+   border-right: 1px solid #2b2b2b;
+   border-bottom-left-radius: 4px;
+   border-top-left-radius: 4px;
+   width: 15%;
+   font-size: 13px;
+}
+
+.search-text {
+   padding: 10px 14px;
+   font-size: 13px;
+   background-color: #252525;
+   border: unset;
+   color: #e0e0e0;
+   width: 30%;
+}
+
+.search-result {
+   background-color: #252525;
+   border: unset;
+   border-right: 1px solid #2b2b2b;
+   border-left: 1px solid #2b2b2b;
+   width: 15%;
+   font-size: 13px;
+}
+
+select:required:invalid {
+   color: gray;
+}
+
+option[value=""][disabled] {
+   display: none;
+}
+
+select:required:valid {
+   color: #e0e0e0;
+}
+
+option {
+   color: #e0e0e0;
+}
+
+input[type=text]:focus {
+   outline: none;
+   box-shadow: none;
+}
+
+select:focus {
+   outline: none;
+}
+
+
+/**** SLIDESHOW ****/
+
+.slideshow-image {
+   display: none;
+   width: 100%;
+}
+
+
+/**** RESULTADOS DA PESQUISA ****/
+
+.cards {
+   display: grid;
+   padding: 40px;
+}
+
+.card {
+   width: 80%;
+   align-items: center;
+   background-color: #313131;
+   border-radius: 4px;
+   margin: 2px;
+   justify-self: center;
+   align-self: center;
+}
+
+.card img {
+   width: 100%;
+   height: 250px;
+}
+
+.card p {
+   font-size: 12px;
+   font-family: 'Kulim Park', sans-serif;
+   text-align: left;
+}
+
+.card h3 {
+   font-size: 18px;
+   margin-bottom: 8px;
+}
+
+.card h4 {
+   font-size: 15px;
+   margin-top: 8px;
+}
+
+.card-elements {
+   padding: 20px 10px;
+}
+
+.tags {
+   color: #888888;
+   border: 1px solid #888888;
+   border-radius: 20px;
+   padding: 7px;
+   font-size: 12px;
+   font-family: 'Kulim Park', sans-serif;
+   margin: 0;
+   width: fit-content;
+   margin: 2px;
+   float: right;
+}
+
+.tags-filmes {
+   color: #b66df9;
+   border: 1px solid #b66df9;
+}
+
+.tags-musicas {
+   color: #6df9f3;
+   border: 1px solid #6df9f3;
+}
+
+.tags-livros {
+   color: #f9d46d;
+   border: 1px solid #f9d46d;
+}
+
+.tags-podcasts {
+   color: #a9f96d;
+   border: 1px solid #a9f96d;
+}
+
+.tags-jogos {
+   color: #836df9;
+   border: 1px solid #836df9;
+}
+
+.tags-autores {
+   color: #f98d6d;
+   border: 1px solid #f98d6d;
+}
+
+.tags-series {
+   color: gold;
+   border: 1px solid gold;
+}
+
+.video-embed {
+   width: 100%;
+   height: 300px;
+}
+
+.wiki {
+   color: white;
+   font-size: 12px;
+   font-weight: bolder;
+   text-decoration: none;
+}
+
+.wiki:link {
+   color: #6f6f6f;
+}
+
+.wiki:hover {
+   color: #ccc;
+}
+
+.wiki:visited {
+   color: #6f6f6f;
+}
+
+
+/**** RODAPÉ ****/
+
+.footer {
+   background-color: #1F1F1F;
+   color: black;
+   height: 50px;
+   display: flex;
+   text-align: center;
+}
+
+.footer-first,
+.footer-third {
+   width: 25%;
+}
+
+.footer-second {
+   width: 50%;
+   height: fit-content;
+   letter-spacing: 3px;
+   font-size: 10px;
+   position: relative;
+   transform: translateY(8px);
+}
+
+.footer-second p {
+   text-align: center !important;
+}
+
+
+/**** BOTÕES ****/
+
+.btn {
+   padding: 10px 14px;
+   text-decoration: none;
+   cursor: pointer;
+   border: unset;
+   color: #e0e0e0;
+   font-size: 14px;
+   background-color: #484848;
+}
+
+.btn-open {
+   float: right;
+   height: 35px;
+   border-radius: 4px;
+   margin-right: 6px;
+   position: relative;
+   transform: translateY(8px);
+}
+
+.btn-open:hover {
+   background-color: #313131;
+}
+
+.btn-close {
+   position: absolute;
+   top: 8px;
+   right: 8px;
+}
+
+.btn-del {
+   float: right;
+   border-radius: 4px;
+   width: 100%;
+   margin: 14px 0 0 0;
+}
+
+.btn-search {
+   border-bottom-right-radius: 4px;
+   border-top-right-radius: 4px;
+   width: 8%;
+   background-image: linear-gradient(to right, #8700ff 0%, #9821ffe3 51%, #8e21ffa3 100%);
+}
+
+.btn-search:hover {
+   background-image: linear-gradient(to right, #9925ff 0%, #a946ffe3 51%, #aa59fda3 100%);
+}
+
+.btn-card {
+   float: right;
+   height: 35px;
+   width: 45px;
+   border-radius: 4px;
+   margin: 1px;
+}
+
+.btn-card:hover {
+   background-color: #313131;
+}
+
+.btn-up {
+   float: right;
+   border-radius: 4px;
+   margin-right: 6px;
+   position: relative;
+   transform: translateY(7px);
+}
+
+.btn-up:hover {
+   background-color: #313131;
+}
+
+
+/**** ÍCONES ****/
+
+.fa-star {
+   color: white;
+}
+
+.fa-search {
+   color: white;
+   font-size: 12px;
+}
+
+.fa-chevron-up {
+   color: white;
+   font-size: 15px;
+}
+
+
+/**** SCROLLBAR ****/
+
+::-webkit-scrollbar {
+   width: 5px;
+}
+
+::-webkit-scrollbar-track {
+   background: #616161;
+}
+
+::-webkit-scrollbar-thumb {
+   background: #1f1f1f;
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background: #2b2b2b;
+}
+
+
+/**** PARA TABLETS ****/
+
+@media screen and (max-height: 450px) {
+   .favorites {
+      padding-top: 15px;
+   }
+   .favorites a {
+      font-size: 18px;
+   }
+}
+
+
+/**** PARA SMARTPHONES ****/
+
+@media only screen and (max-width:620px) {
+   .search form {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+   }
+   .search-content,
+   .search-text,
+   .search-result,
+   .btn-search {
+      width: 100% !important;
+   }
+   .footer-first {
+      display: none;
+   }
+   .footer-second {
+      width: 100%;
+      float: left;
+      text-align: start;
+      margin-left: 12px;
+   }
+   .card section {
+      display: block;
+   }
+   .card div {
+      margin: 0 0 40px 0;
+   }
+   section * {
+      max-width: 100%;
+   }
+}

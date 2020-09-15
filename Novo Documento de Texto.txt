@@ -1,0 +1,47 @@
+# Popcorn
+
+Site de pesquisa de recomendações sobre categorias (músicas, filmes, séries, jogos...).
+
+
+ÍNDICE
+1) Inicialização
+2) Extrutura
+3) Documentação
+4) Licença
+5) Conclusão
+
+
+1) Inicialização
+como instalar/como por a funcionar?
+
+
+2) Extrutura
+app/
+├── css/
+│     ├── main.css
+├── images/
+│     ├── 1.png
+│     ├── 2.png
+│     ├── 3.png
+│     ├── 4.png
+│     ├── logo.png
+├── js/
+│     ├── cardHTML.js
+│     ├── favoriteHTML.js
+│     ├── functions.js
+│     ├── main.js
+│     ├── tagHTML.js
+└── index.html
+
+
+3) Documentação
+
+
+
+4) Licença
+
+
+
+5) Conclusão
+
+
