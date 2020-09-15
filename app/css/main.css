@@ -2,26 +2,25 @@
 
 * {
    font-family: 'Roboto', sans-serif;
-   font-family: 'Kulim Park', sans-serif;
 }
 
 body {
-   margin: 0;
    background-color: #121212;
+   margin: 0;
 }
 
 h1,
 h2,
 h3,
 h4 {
-   font-family: 'Kulim Park', sans-serif;
    color: #f2f2f2;
+   font-family: 'Kulim Park', sans-serif;
    text-align: center;
 }
 
 p {
-   font-family: 'Roboto', sans-serif;
    color: #f2f2f2;
+   font-family: 'Roboto', sans-serif;
    text-align: justify;
 }
 
@@ -29,45 +28,45 @@ p {
 /**** CABEÇALHO ****/
 
 .header {
-   overflow: hidden;
    background-color: #1F1F1F;
+   overflow: hidden;
 }
 
 .header img {
-   width: 50px;
-   height: 50px;
    float: left;
+   height: 50px;
+   width: 50px;
 }
 
 .header h3 {
    display: inline-block;
+   margin: 0;
    padding: 14px 16px;
    text-decoration: none;
-   margin: 0;
 }
 
 
 /**** FAVORITOS ****/
 
 .favorites {
-   height: 100%;
-   width: 0;
-   position: fixed;
-   z-index: 1;
-   top: 0;
-   right: 0;
    background-color: #111;
+   height: 100%;
    overflow-x: hidden;
-   transition: 0.5s;
    padding-top: 60px;
+   position: fixed;
+   right: 0;
+   top: 0;
+   transition: 0.5s;
+   width: 0px;
+   z-index: 1;
 }
 
 .favorites a {
-   padding: 8px 8px 8px 32px;
-   text-decoration: none;
-   font-size: 25px;
    color: #818181;
    display: block;
+   font-size: 25px;
+   padding: 8px 8px 8px 32px;
+   text-decoration: none;
    transition: 0.3s;
 }
 
@@ -77,77 +76,90 @@ p {
 }
 
 .favorites-items {
+   background-color: #313131;
+   border-radius: 4px;
    height: 100%;
-   width: 100%;
+   margin: 4px;
    padding: 10px;
-   border-radius: 4px;
-   background-color: #313131;
-   margin: 4px;
-}
-
-.row:after {
-   content: "";
-   display: table;
-   clear: both;
-}
-
-.favorites-div {
-   border-radius: 4px;
-   background-color: #313131;
-   margin: 4px;
-   padding: 4px;
    width: 100%;
-   position: flex;
+}
+
+.favorite {
+   height: 120px;
 }
 
 .favorite-title {
    text-align: center;
 }
 
-.favorites-div-items {
-   width: 70%;
+.favorite .tags {
+   background-color: violet;
+   width: 100%;
+   margin: auto;
+   text-align: center;
+   /* margin: 2px; */
+   /* padding: 7px; */
+   /* width: fit-content; */
+}
+
+
+/*
+.favorites-div {
+   background-color: #313131;
+   border-radius: 4px;
+   margin: 4px;
+   padding: 4px;
+   position: flex;
+   width: 100%;
+
 }
 
 .favorites-div img {
-   width: 30%;
    height: 35%;
+   width: 30%;
+
 }
+
+.favorites-div-items {
+   width: 70%;
+}
+*/
 
 
 /**** PESQUISA ****/
 
 .search-form {
    display: flex;
-   margin: 10px 0;
    justify-content: center;
+   margin: 10px 0;
 }
 
 .search-content {
    background-color: #252525;
    border: unset;
-   border-right: 1px solid #2b2b2b;
    border-bottom-left-radius: 4px;
+   border-right: 1px solid #2b2b2b;
    border-top-left-radius: 4px;
-   width: 15%;
    font-size: 13px;
+   width: 15%;
 }
 
 .search-text {
-   padding: 10px 14px;
-   font-size: 13px;
    background-color: #252525;
    border: unset;
    color: #e0e0e0;
+   font-size: 13px;
+   padding: 10px 14px;
    width: 30%;
 }
 
 .search-result {
    background-color: #252525;
    border: unset;
-   border-right: 1px solid #2b2b2b;
    border-left: 1px solid #2b2b2b;
-   width: 15%;
+   border-right: 1px solid #2b2b2b;
    font-size: 13px;
+   width: 15%;
 }
 
 select:required:invalid {
@@ -167,8 +179,8 @@ option {
 }
 
 input[type=text]:focus {
-   outline: none;
    box-shadow: none;
+   outline: none;
 }
 
 select:focus {
@@ -192,23 +204,23 @@ select:focus {
 }
 
 .card {
-   width: 80%;
    align-items: center;
+   align-self: center;
    background-color: #313131;
    border-radius: 4px;
-   margin: 2px;
    justify-self: center;
-   align-self: center;
+   margin: 2px;
+   width: 80%;
 }
 
 .card img {
-   width: 100%;
    height: 250px;
+   width: 100%;
 }
 
 .card p {
-   font-size: 12px;
    font-family: 'Kulim Park', sans-serif;
+   font-size: 12px;
    text-align: left;
 }
 
@@ -227,56 +239,56 @@ select:focus {
 }
 
 .tags {
-   color: #888888;
    border: 1px solid #888888;
    border-radius: 20px;
-   padding: 7px;
-   font-size: 12px;
-   font-family: 'Kulim Park', sans-serif;
-   margin: 0;
-   width: fit-content;
-   margin: 2px;
+   color: #888888;
    float: right;
+   font-family: 'Kulim Park', sans-serif;
+   font-size: 12px;
+   margin: 2px;
+   padding: 7px;
+   text-align: center;
+   width: fit-content;
 }
 
 .tags-filmes {
-   color: #b66df9;
    border: 1px solid #b66df9;
+   color: #b66df9;
 }
 
 .tags-musicas {
-   color: #6df9f3;
    border: 1px solid #6df9f3;
+   color: #6df9f3;
 }
 
 .tags-livros {
-   color: #f9d46d;
    border: 1px solid #f9d46d;
+   color: #f9d46d;
 }
 
 .tags-podcasts {
-   color: #a9f96d;
    border: 1px solid #a9f96d;
+   color: #a9f96d;
 }
 
 .tags-jogos {
-   color: #836df9;
    border: 1px solid #836df9;
+   color: #836df9;
 }
 
 .tags-autores {
-   color: #f98d6d;
    border: 1px solid #f98d6d;
+   color: #f98d6d;
 }
 
 .tags-series {
-   color: gold;
    border: 1px solid gold;
+   color: gold;
 }
 
 .video-embed {
-   width: 100%;
    height: 300px;
+   width: 100%;
 }
 
 .wiki {
@@ -304,8 +316,8 @@ select:focus {
 .footer {
    background-color: #1F1F1F;
    color: black;
-   height: 50px;
    display: flex;
+   height: 50px;
    text-align: center;
 }
 
@@ -315,12 +327,12 @@ select:focus {
 }
 
 .footer-second {
-   width: 50%;
+   font-size: 10px;
    height: fit-content;
    letter-spacing: 3px;
-   font-size: 10px;
    position: relative;
    transform: translateY(8px);
+   width: 50%;
 }
 
 .footer-second p {
@@ -331,19 +343,19 @@ select:focus {
 /**** BOTÕES ****/
 
 .btn {
-   padding: 10px 14px;
-   text-decoration: none;
-   cursor: pointer;
+   background-color: #484848;
    border: unset;
    color: #e0e0e0;
+   cursor: pointer;
    font-size: 14px;
-   background-color: #484848;
+   padding: 10px 14px;
+   text-decoration: none;
 }
 
 .btn-open {
+   border-radius: 4px;
    float: right;
    height: 35px;
-   border-radius: 4px;
    margin-right: 6px;
    position: relative;
    transform: translateY(8px);
@@ -355,22 +367,22 @@ select:focus {
 
 .btn-close {
    position: absolute;
-   top: 8px;
    right: 8px;
+   top: 8px;
 }
 
 .btn-del {
-   float: right;
    border-radius: 4px;
-   width: 100%;
+   float: right;
    margin: 14px 0 0 0;
+   width: 100%;
 }
 
 .btn-search {
+   background-image: linear-gradient(to right, #8700ff 0%, #9821ffe3 51%, #8e21ffa3 100%);
    border-bottom-right-radius: 4px;
    border-top-right-radius: 4px;
    width: 8%;
-   background-image: linear-gradient(to right, #8700ff 0%, #9821ffe3 51%, #8e21ffa3 100%);
 }
 
 .btn-search:hover {
@@ -378,11 +390,11 @@ select:focus {
 }
 
 .btn-card {
+   border-radius: 4px;
    float: right;
    height: 35px;
-   width: 45px;
-   border-radius: 4px;
    margin: 1px;
+   width: 45px;
 }
 
 .btn-card:hover {
@@ -454,9 +466,9 @@ select:focus {
 
 @media only screen and (max-width:620px) {
    .search form {
+      align-items: center;
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
    }
    .search-content,
    .search-text,
@@ -468,10 +480,10 @@ select:focus {
       display: none;
    }
    .footer-second {
-      width: 100%;
       float: left;
-      text-align: start;
       margin-left: 12px;
+      text-align: start;
+      width: 100%;
    }
    .card section {
       display: block;
