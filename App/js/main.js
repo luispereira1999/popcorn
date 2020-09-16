@@ -130,12 +130,16 @@ $(document).ready(function() {
    // clicar no botão de mostrar a lista favoritos
    $(".btn-open").click(function() {
       $(".favorites").css("width", "300px");
+      $("main").css("margin-right", "300px");
+      $("main").css("opacity", "0.5");
    });
 
 
    // clicar no botão de esconder a lista favoritos
    $(".btn-close").click(function() {
       $(".favorites").css("width", "0px");
+      $("main").css("margin-right", "0px");
+      $("main").css("opacity", "1");
    });
 
 

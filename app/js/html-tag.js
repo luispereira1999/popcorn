@@ -8,31 +8,31 @@ class HtmlTag {
    getFunctionToSetHtmlTag() {
       let acceptedTypes = {
          music: function(element) {
-            element.addClass("tags tags-musicas");
+            element.addClass("tag tag-music");
             element.text("Música");
          },
-         movies: function(element) {
-            element.addClass("tags tags-filmes");
+         movie: function(element) {
+            element.addClass("tag tag-movie");
             element.text("Filme");
          },
-         shows: function(element) {
-            element.addClass("tags tags-series");
+         show: function(element) {
+            element.addClass("tag tag-show");
             element.text("Série");
          },
-         books: function(element) {
-            element.addClass("tags tags-livros");
+         book: function(element) {
+            element.addClass("tag tag-book");
             element.text("Livro");
          },
-         authors: function(element) {
-            element.addClass("tags tags-autores");
+         author: function(element) {
+            element.addClass("tag tag-author");
             element.text("Autor");
          },
-         games: function(element) {
-            element.addClass("tags tags-jogos");
+         game: function(element) {
+            element.addClass("tag tag-game");
             element.text("Jogo");
          },
-         podcasts: function(element) {
-            element.addClass("tags tags-podcasts");
+         podcast: function(element) {
+            element.addClass("tag tag-podcast");
             element.text("Podcast");
          }
       };

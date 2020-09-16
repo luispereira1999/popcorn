@@ -36,71 +36,78 @@
 </head>
 
 <body>
-   <!-- CABEÇALHO -->
-   <nav class="header">
-      <img src="images/logo.png">
-      <h3>Popcorn</h3>
-      <button class="btn btn-open"><i class="far fa-star"></i> <span class="header-number-favorites">0</span></button>
-   </nav>
+   <!-- PRINCIPAL -->
+   <main>
+      <!-- CABEÇALHO -->
+      <nav class="header">
+         <img src="images/logo.png">
+         <h3>Popcorn</h3>
+
+         <button class="btn btn-open">
+            <i class="far fa-star"></i>
+            <span class="header-number-favorites">0</span>
+         </button>
+      </nav>
+
+      <!-- PESQUISA -->
+      <section class="search">
+         <form class="search-form" action="#" method="get" accept-charset="utf-8">
+            <select class="search-content" required>
+               <option value="" disabled selected hidden>O que vai procurar?</option>
+               <option value="music">Música</option>
+               <option value="movie">Filme</option>
+               <option value="show">Série</option>
+               <option value="book">Livro</option>
+               <option value="author">Autor</option>
+               <option value="game">Jogo</option>
+               <option value="podcast">Podcast</option>
+            </select>
+
+            <input type="text" name="search field" placeholder="Música, Filmes, Séries, Livros, Autores, Jogos ou Podcasts" class="search-text" />
+
+            <select class="search-result" required>
+               <option value="" disabled selected hidden>O que deseja encontrar?</option>
+               <option value="music">Músicas</option>
+               <option value="movies">Filmes</option>
+               <option value="shows">Séries</option>
+               <option value="books">Livros</option>
+               <option value="authors">Autores</option>
+               <option value="games">Jogos</option>
+               <option value="podcasts">Podcasts</option>
+            </select>
+
+            <button class="btn btn-search"><i class="fas fa-search"></i> Pesquisar</button>
+         </form>
+      </section>
+
+      <!-- SLIDESHOW -->
+      <section class="slideshow">
+         <img class="slideshow-image" src="images/1.png">
+         <img class="slideshow-image" src="images/2.png">
+         <img class="slideshow-image" src="images/3.png">
+         <img class="slideshow-image" src="images/4.png">
+      </section>
+
+      <!-- RESULTADOS DA PESQUISA -->
+      <section class="cards"></section>
+
+      <!-- RODAPÉ -->
+      <footer class="footer">
+         <div class="footer-first"></div>
+         <div class="footer-second">
+            <p>Popcorn © 2020</p>
+         </div>
+         <div class="footer-third">
+            <button class="btn btn-up"><i class="fas fa-chevron-up"></i></button>
+         </div>
+      </footer>
+   </main>
 
    <!-- FAVORITOS -->
    <section class="favorites">
       <a class="btn-close"><i class="fas fa-times"></i></a>
-      <div class="favorites-items"></div>
+      <div class="favorites-items"> </div>
    </section>
-
-   <!-- PESQUISA -->
-   <section class="search">
-      <form class="search-form" action="#" method="get" accept-charset="utf-8">
-         <select class="search-content" required>
-            <option value="" disabled selected hidden>Escolha pelo que vai procurar</option>
-            <option value="music">Música</option>
-            <option value="movie">Filme</option>
-            <option value="show">Série</option>
-            <option value="book">Livro</option>
-            <option value="author">Autor</option>
-            <option value="game">Jogo</option>
-            <option value="podcast">Podcast</option>
-         </select>
-
-         <input type="text" name="search field" placeholder="Música, Filmes, Séries, Livros, Autores, Jogos ou Podcasts" class="search-text" />
-
-         <select class="search-result" required>
-            <option value="" disabled selected hidden>Escolha o que deseja encontrar</option>
-            <option value="music">Músicas</option>
-            <option value="movies">Filmes</option>
-            <option value="shows">Séries</option>
-            <option value="books">Livros</option>
-            <option value="authors">Autores</option>
-            <option value="games">Jogos</option>
-            <option value="podcasts">Podcasts</option>
-         </select>
-
-         <button class="btn btn-search"><i class="fas fa-search"></i> Pesquisar</button>
-      </form>
-   </section>
-
-   <!-- SLIDESHOW -->
-   <section class="slideshow">
-      <img class="slideshow-image" src="images/1.png">
-      <img class="slideshow-image" src="images/2.png">
-      <img class="slideshow-image" src="images/3.png">
-      <img class="slideshow-image" src="images/4.png">
-   </section>
-
-   <!-- RESULTADOS DA PESQUISA -->
-   <section class="cards"></section>
-
-   <!-- RODAPÉ -->
-   <footer class="footer">
-      <div class="footer-first"></div>
-      <div class="footer-second">
-         <p>Popcorn © 2020</p>
-      </div>
-      <div class="footer-third">
-         <button class="btn btn-up"><i class="fas fa-chevron-up"></i></button>
-      </div>
-   </footer>
 </body>
 
 </html>

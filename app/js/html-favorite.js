@@ -10,7 +10,6 @@ class HtmlFavorite {
    setHtmlAttributes() {
       this.div_favorite.addClass("favorite");
       this.h4_title.addClass("favorite-title");
-      this.p_tag.addClass("tags tags-fav");
       this.button_delete.addClass("btn btn-del fas fa-trash-alt");
    }
 

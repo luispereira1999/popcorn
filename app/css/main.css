@@ -1,6 +1,6 @@
 /**** GLOBAL ****/
 
-* {
+#main {
    font-family: 'Roboto', sans-serif;
 }
 
@@ -29,7 +29,9 @@ p {
 
 .header {
    background-color: #1F1F1F;
-   overflow: hidden;
+   display: inline-block;
+   height: 100%;
+   width: 100%;
 }
 
 .header img {
@@ -50,14 +52,14 @@ p {
 
 .favorites {
    background-color: #111;
-   height: 100%;
+   height: fit-content;
    overflow-x: hidden;
    padding-top: 60px;
-   position: fixed;
+   position: absolute;
    right: 0;
    top: 0;
    transition: 0.5s;
-   width: 0px;
+   width: 0;
    z-index: 1;
 }
 
@@ -79,51 +81,24 @@ p {
    background-color: #313131;
    border-radius: 4px;
    height: 100%;
-   margin: 4px;
-   padding: 10px;
+   overflow-x: hidden;
+   padding: 10px 10px 0px 8px;
    width: 100%;
 }
 
 .favorite {
-   height: 120px;
+   text-align: center;
+   height: 110px;
 }
 
 .favorite-title {
-   text-align: center;
+   float: left;
+   margin: 10px 10px 10px 0px;
 }
 
-.favorite .tags {
-   background-color: violet;
-   width: 100%;
-   margin: auto;
-   text-align: center;
-   /* margin: 2px; */
-   /* padding: 7px; */
-   /* width: fit-content; */
+.favorite .tag {
+   margin: 6px 14px 10px 10px;
 }
-
-
-/*
-.favorites-div {
-   background-color: #313131;
-   border-radius: 4px;
-   margin: 4px;
-   padding: 4px;
-   position: flex;
-   width: 100%;
-
-}
-
-.favorites-div img {
-   height: 35%;
-   width: 30%;
-
-}
-
-.favorites-div-items {
-   width: 70%;
-}
-*/
 
 
 /**** PESQUISA ****/
@@ -150,7 +125,7 @@ p {
    color: #e0e0e0;
    font-size: 13px;
    padding: 10px 14px;
-   width: 30%;
+   width: 29%;
 }
 
 .search-result {
@@ -238,52 +213,49 @@ select:focus {
    padding: 20px 10px;
 }
 
-.tags {
-   border: 1px solid #888888;
+.tag {
    border-radius: 20px;
-   color: #888888;
    float: right;
    font-family: 'Kulim Park', sans-serif;
    font-size: 12px;
    margin: 2px;
    padding: 7px;
    text-align: center;
-   width: fit-content;
 }
 
-.tags-filmes {
-   border: 1px solid #b66df9;
-   color: #b66df9;
-}
-
-.tags-musicas {
+.tag-music {
    border: 1px solid #6df9f3;
    color: #6df9f3;
 }
 
-.tags-livros {
+.tag-movie {
+   border: 1px solid #b66df9;
+   color: #b66df9;
+}
+
+.tag-show {
+   border: 1px solid gold;
+   color: gold;
+}
+
+.tag-book {
    border: 1px solid #f9d46d;
    color: #f9d46d;
 }
 
-.tags-podcasts {
-   border: 1px solid #a9f96d;
-   color: #a9f96d;
-}
-
-.tags-jogos {
-   border: 1px solid #836df9;
-   color: #836df9;
-}
-
-.tags-autores {
+.tag-author {
    border: 1px solid #f98d6d;
    color: #f98d6d;
 }
 
-.tags-series {
-   border: 1px solid gold;
-   color: gold;
+.tag-game {
+   border: 1px solid #836df9;
+   color: #836df9;
+}
+
+.tag-podcast {
+   border: 1px solid #a9f96d;
+   color: #a9f96d;
 }
 
 .video-embed {
@@ -352,12 +324,15 @@ select:focus {
    text-decoration: none;
 }
 
+.btn:focus {
+   outline: 0;
+}
+
 .btn-open {
    border-radius: 4px;
    float: right;
    height: 35px;
    margin-right: 6px;
-   position: relative;
    transform: translateY(8px);
 }
 
@@ -373,16 +348,18 @@ select:focus {
 
 .btn-del {
    border-radius: 4px;
-   float: right;
-   margin: 14px 0 0 0;
-   width: 100%;
+   margin: 15px 15px 15px 0px;
+   width: 95%;
+}
+
+.btn-del:hover {
+   background-color: #5a5a5a;
 }
 
 .btn-search {
    background-image: linear-gradient(to right, #8700ff 0%, #9821ffe3 51%, #8e21ffa3 100%);
    border-bottom-right-radius: 4px;
    border-top-right-radius: 4px;
-   width: 8%;
 }
 
 .btn-search:hover {
@@ -431,7 +408,7 @@ select:focus {
 }
 
 
-/**** SCROLLBAR ****/
+/**** SCROLLBARS ****/
 
 ::-webkit-scrollbar {
    width: 5px;
