@@ -67,6 +67,10 @@ function getInputText() {
    return $(".search-text").val();
 }
 
+function getInputNumber() {
+   return $(".search-number").val();
+}
+
 
 function getTitleText(element) {
    return element.text();
@@ -94,7 +98,7 @@ function getResults(response) {
 }
 
 
-function getNumberOfResults(response) {
+function getNumberOfResultsObtained(response) {
    return response.Similar.Results.length;
 }
 

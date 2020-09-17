@@ -3,6 +3,7 @@ let slideshowIsActive = true;
 
 let searchContentType = "";
 let searchResultType = "";
+let numberOfResultsToSearch = 0;
 
 let favorites = [];
 
@@ -19,12 +20,13 @@ $(document).ready(function() {
       searchContentType = getSearchContentOption();
       let textToSearch = getInputText();
       searchResultType = getSearchResultOption();
+      numberOfResultsToSearch = getInputNumber();
 
-      if (searchContentType != "" && textToSearch != "" && searchResultType != "") {
+      if (searchContentType != "" && textToSearch != "" && searchResultType != "" && (numberOfResultsToSearch >= 1 && numberOfResultsToSearch <= 20)) {
          // URL para fazer a chamada à API
          let apiKey = "382610-popcorn-40K5FW57";
          let searchQuery = encodeURIComponent(searchContentType + ":" + textToSearch);
-         let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&info=1&limit=6";
+         let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&limit=" + numberOfResultsToSearch + "&info=1";
 
          // fazer chamada à API
          $.ajax({
@@ -34,9 +36,9 @@ $(document).ready(function() {
             url: url,
 
             success: function(response) {
-               let numberOfResults = getNumberOfResults(response);
+               let numberOfResultsObtained = getNumberOfResultsObtained(response);
 
-               if (numberOfResults > 0) {
+               if (numberOfResultsObtained > 0) {
                   // ao fazer a pesquisa pela primeira vez, remove o slideshow
                   if (slideshowIsActive) {
                      slideshowIsActive = disableSlideshow(slideshowId);
@@ -72,7 +74,7 @@ $(document).ready(function() {
       // URL para fazer a chamada à API
       let apiKey = "382610-popcorn-40K5FW57";
       let searchQuery = searchContentType + ":" + textToSearch;
-      let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&info=1&limit=6";
+      let url = "https://tastedive.com/api/similar?k=" + apiKey + "&q=" + searchQuery + "&type=" + searchResultType + "&limit=" + numberOfResultsToSearch + "&info=1";
 
       // fazer chamada à API
       $.ajax({
@@ -82,9 +84,9 @@ $(document).ready(function() {
          url: url,
 
          success: function(response) {
-            let numberOfResults = getNumberOfResults(response);
+            let numberOfResultsObtained = getNumberOfResultsObtained(response);
 
-            if (numberOfResults > 0) {
+            if (numberOfResultsObtained > 0) {
                let results = getResults(response);
                createHtmlCards(results, searchResultType);
             } else {

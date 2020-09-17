@@ -63,7 +63,7 @@
                <option value="podcast">Podcast</option>
             </select>
 
-            <input type="text" name="search field" placeholder="Música, Filmes, Séries, Livros, Autores, Jogos ou Podcasts" class="search-text" />
+            <input type="text" placeholder="Texto da Pesquisa" class="search-text" />
 
             <select class="search-result" required>
                <option value="" disabled selected hidden>O que deseja encontrar?</option>
@@ -75,6 +75,8 @@
                <option value="games">Jogos</option>
                <option value="podcasts">Podcasts</option>
             </select>
+
+            <input type="number" class="search-number" placeholder="Nº de Resultados" min="1" max="20">
 
             <button class="btn btn-search"><i class="fas fa-search"></i> Pesquisar</button>
          </form>
