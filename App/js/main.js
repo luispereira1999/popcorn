@@ -26,6 +26,10 @@ $(document).ready(function() {
       numberOfResultsToSearch = getInputNumber();
 
       if (searchContentType != "" && textToSearch != "" && searchResultType != "" && (numberOfResultsToSearch >= 1 && numberOfResultsToSearch <= 20)) {
+         if (thereIsHtmlCardsFromLastSearch()) {
+            destroyHtmlCards();
+         }
+
          // URL para fazer a chamada à API
          let apiKey = "382610-popcorn-40K5FW57";
          let searchQuery = encodeURIComponent(searchContentType + ":" + textToSearch);
@@ -60,7 +64,7 @@ $(document).ready(function() {
             }
          });
       } else {
-         showMessage("Valor não inserido!", "error");
+         showMessage("Valor não inserido corretamente!", "error");
       }
    });
 
@@ -71,7 +75,6 @@ $(document).ready(function() {
 
       let h3_card = $(this).parent().children("h3");
       let textToSearch = getTitleText(h3_card);
-      // remover cards da pesquisa anterior
       destroyHtmlCards();
 
       // URL para fazer a chamada à API

@@ -69,6 +69,7 @@ function getInputText() {
    return $(".search-text").val();
 }
 
+
 function getInputNumber() {
    return $(".search-number").val();
 }
@@ -118,6 +119,14 @@ function createHtmlCards(results, searchResultType) {
 
 function destroyHtmlCards() {
    $(".cards").children(".card").remove();
+}
+
+
+function thereIsHtmlCardsFromLastSearch() {
+   if ($(".cards").find(".card").length > 0) {
+      return true;
+   } else
+      return false;
 }
 
 
