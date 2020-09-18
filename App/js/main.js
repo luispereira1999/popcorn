@@ -1,3 +1,6 @@
+// este ficheiro serve para declarar variáveis globais e
+// manipular os eventos que surgem durante o funcionamento do site
+
 let imageIndex = 0;
 let slideshowIsActive = true;
 

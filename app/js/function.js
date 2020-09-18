@@ -1,3 +1,5 @@
+// este ficheiro serve para armazenar as funções que são chamadas quando os eventos são manipulados no main.js
+
 function showSlideshow() {
    let images = $(".slideshow-image");
    let numberOfImages = images.length;

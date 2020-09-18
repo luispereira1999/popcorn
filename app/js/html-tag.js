@@ -1,3 +1,5 @@
+// esta classe serve para criar os elementos HTML de uma tag (num card ou num favorito)
+
 class HtmlTag {
    constructor(element, searchResultType) {
       this.p_tag = element;

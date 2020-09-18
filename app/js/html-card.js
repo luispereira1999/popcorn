@@ -1,3 +1,5 @@
+// esta classe serve para criar os elementos HTML de um card (de um resultado da pesquisa)
+
 class HtmlCard {
    constructor() {
       this.div_card = $("<div></div>");

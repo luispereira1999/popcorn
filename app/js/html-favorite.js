@@ -1,3 +1,5 @@
+// esta classe serve para criar os elementos HTML de um favorito (da lista de favoritos)
+
 class HtmlFavorite {
    constructor() {
       this.div_favorite = $("<div></div>");
