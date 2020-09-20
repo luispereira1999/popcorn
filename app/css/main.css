@@ -25,6 +25,21 @@ p {
 }
 
 
+/**** PRINCIPAL ****/
+
+.main-without-sidebar {
+   margin-right: 0px;
+   opacity: 1;
+   transition: margin-right 0.5s;
+}
+
+.main-with-sidebar {
+   margin-right: 256px;
+   opacity: 0.5;
+   transition: margin-right 0.5s;
+}
+
+
 /**** CABEÇALHO ****/
 
 .header {
@@ -258,13 +273,14 @@ option[value=""][disabled] {
 }
 
 .footer-second p {
-   text-align: center !important;
+   text-align: center;
 }
 
 
 /**** FAVORITOS ****/
 
 .favorites {
+   display: inline-block;
    background-color: #111;
    height: 100%;
    overflow-x: hidden;
@@ -273,6 +289,7 @@ option[value=""][disabled] {
    right: 0;
    top: 0;
    transition: 0.5s;
+   width: 0;
 }
 
 .favorites a {

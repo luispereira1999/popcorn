@@ -50,7 +50,7 @@ $(document).ready(function() {
                   if (slideshowIsActive) {
                      slideshowIsActive = disableSlideshow(slideshowId);
                      removeSlideshow();
-                     enableCardsDiv();
+                     displayCardsDiv();
                   }
 
                   let results = getResults(response);
@@ -139,16 +139,16 @@ $(document).ready(function() {
    // clicar no botão de mostrar a lista favoritos
    $(".btn-open").click(function() {
       $(".favorites").css("width", "256px");
-      $("main").css("margin-right", "256px");
-      $("main").css("opacity", "0.5");
+      $("main").addClass("main-with-sidebar");
+      $("main").removeClass("main-without-sidebar");
    });
 
 
    // clicar no botão de esconder a lista favoritos
    $(".btn-close").click(function() {
       $(".favorites").css("width", "0px");
-      $("main").css("margin-right", "0px");
-      $("main").css("opacity", "1");
+      $("main").addClass("main-without-sidebar");
+      $("main").removeClass("main-with-sidebar");
    });
 
 

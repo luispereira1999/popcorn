@@ -53,7 +53,7 @@ function showCurrentImage(images, imageIndex) {
 }
 
 
-function enableCardsDiv() {
+function displayCardsDiv() {
    $(".cards").css("display", "flex");
 }
 
