@@ -9,7 +9,6 @@ let searchResultType = "";
 let numberOfResultsToSearch = 0;
 
 let favorites = [];
-
 let sidebarOpened = false;
 
 

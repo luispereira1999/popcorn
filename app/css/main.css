@@ -409,6 +409,18 @@ option[value=""][disabled] {
    background-color: #313131;
 }
 
+.btn-github {
+   float: left;
+   border-radius: 4px;
+   margin-left: 6px;
+   position: relative;
+   transform: translateY(7px);
+}
+
+.btn-github:hover {
+   background-color: #313131;
+}
+
 
 /**** ÍCONES ****/
 
@@ -509,14 +521,5 @@ option[value=""][disabled] {
    .card-header {
       flex-wrap: wrap;
       justify-content: center;
-   }
-   .footer-first {
-      display: none;
-   }
-   .footer-second {
-      float: left;
-      margin-left: 12px;
-      text-align: start;
-      width: 100%;
    }
 }
