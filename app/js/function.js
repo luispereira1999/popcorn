@@ -53,6 +53,11 @@ function showCurrentImage(images, imageIndex) {
 }
 
 
+function enableCardsDiv() {
+   $(".cards").css("display", "flex");
+}
+
+
 function getSearchContentOption() {
    let text = $(".search-content option:selected").val();
    return text;
@@ -82,18 +87,18 @@ function getTitleText(element) {
 
 function getResults(response) {
    let result = {
-      title: "",
-      description: "",
       youtubeLink: "",
+      title: "",
       wikipediaLink: "",
+      description: "",
    };
    let results = [];
 
    response.Similar.Results.forEach(function(element) {
-      result.title = element.Name;
-      result.description = element.wTeaser;
       result.youtubeLink = element.yUrl;
+      result.title = element.Name;
       result.wikipediaLink = element.wUrl;
+      result.description = element.wTeaser;
       results.push(JSON.parse(JSON.stringify(result)));
    });
 

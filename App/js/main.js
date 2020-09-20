@@ -46,10 +46,11 @@ $(document).ready(function() {
                let numberOfResultsObtained = getNumberOfResultsObtained(response);
 
                if (numberOfResultsObtained > 0) {
-                  // ao fazer a pesquisa pela primeira vez, remove o slideshow
+                  // ao fazer a pesquisa pela primeira vez
                   if (slideshowIsActive) {
                      slideshowIsActive = disableSlideshow(slideshowId);
                      removeSlideshow();
+                     enableCardsDiv();
                   }
 
                   let results = getResults(response);
@@ -137,8 +138,8 @@ $(document).ready(function() {
 
    // clicar no botão de mostrar a lista favoritos
    $(".btn-open").click(function() {
-      $(".favorites").css("width", "300px");
-      $("main").css("margin-right", "300px");
+      $(".favorites").css("width", "256px");
+      $("main").css("margin-right", "256px");
       $("main").css("opacity", "0.5");
    });
 

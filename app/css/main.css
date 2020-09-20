@@ -3,12 +3,9 @@
 
 /**** GLOBAL ****/
 
-#main {
-   font-family: 'Roboto', sans-serif;
-}
-
 body {
    background-color: #121212;
+   font-family: 'Roboto', sans-serif;
    margin: 0;
 }
 
@@ -51,65 +48,12 @@ p {
 }
 
 
-/**** FAVORITOS ****/
-
-.favorites {
-   background-color: #111;
-   height: fit-content;
-   overflow-x: hidden;
-   padding-top: 60px;
-   position: absolute;
-   right: 0;
-   top: 0;
-   transition: 0.5s;
-   width: 0;
-   z-index: 1;
-}
-
-.favorites a {
-   color: #818181;
-   display: block;
-   font-size: 25px;
-   padding: 8px 8px 8px 32px;
-   text-decoration: none;
-   transition: 0.3s;
-}
-
-.favorites a:hover {
-   color: #f1f1f1;
-   cursor: pointer;
-}
-
-.favorites-items {
-   background-color: #313131;
-   border-radius: 4px;
-   height: 100%;
-   overflow-x: hidden;
-   padding: 10px 10px 0px 8px;
-   width: 100%;
-}
-
-.favorite {
-   height: 110px;
-   text-align: center;
-}
-
-.favorite-title {
-   float: left;
-   margin: 10px 10px 10px 0px;
-}
-
-.favorite .tag {
-   margin: 6px 14px 10px 10px;
-}
-
-
 /**** PESQUISA ****/
 
 .search-form {
    display: flex;
    justify-content: center;
-   margin: 10px 0;
+   margin-top: 10px;
 }
 
 .search-content {
@@ -120,7 +64,7 @@ p {
    border-top-left-radius: 4px;
    font-size: 13px;
    padding: 10px;
-   width: 13%;
+   width: 16%;
 }
 
 .search-text {
@@ -129,8 +73,8 @@ p {
    border-right: 1px solid #3d3d3d;
    color: #e0e0e0;
    font-size: 13px;
-   padding: 10px;
-   width: 15%;
+   padding: 10px 10px 10px 14px;
+   width: 16%;
 }
 
 .search-result {
@@ -139,17 +83,16 @@ p {
    border-right: 1px solid #3d3d3d;
    font-size: 13px;
    padding: 10px;
-   width: 15%;
+   width: 18%;
 }
 
 .search-number {
    background-color: #252525;
    border: unset;
-   border-right: 1px solid #3d3d3d;
    color: #e0e0e0;
    font-size: 13px;
-   padding: 10px;
-   width: 10%;
+   padding: 10px 10px 10px 14px;
+   width: 12%;
 }
 
 select:required:invalid {
@@ -177,6 +120,10 @@ option[value=""][disabled] {
 
 /**** SLIDESHOW ****/
 
+.slideshow {
+   margin: 10px 0px;
+}
+
 .slideshow-image {
    display: none;
    width: 100%;
@@ -186,18 +133,27 @@ option[value=""][disabled] {
 /**** RESULTADOS DA PESQUISA ****/
 
 .cards {
-   display: grid;
-   padding: 40px;
+   display: none;
+   flex-direction: column;
+   padding: 30px 0px;
 }
 
 .card {
-   align-items: center;
    align-self: center;
    background-color: #313131;
    border-radius: 4px;
-   justify-self: center;
    margin: 2px;
-   width: 80%;
+   width: 90%;
+}
+
+.video-embed {
+   height: 300px;
+   width: 100%;
+}
+
+.card-header {
+   display: flex;
+   flex-direction: row;
 }
 
 .card img {
@@ -205,20 +161,26 @@ option[value=""][disabled] {
    width: 100%;
 }
 
-.card p {
-   font-family: 'Kulim Park', sans-serif;
-   font-size: 12px;
-   text-align: left;
-}
-
 .card h3 {
-   font-size: 18px;
-   margin-bottom: 8px;
+   margin: 15px 0px;
+   width: 100%;
 }
 
-.card h4 {
-   font-size: 15px;
-   margin-top: 8px;
+.card a {
+   color: #f2f2f2;
+   text-decoration: none;
+}
+
+.card a:hover {
+   color: #a946ffe3;
+}
+
+.card p {
+   text-align: justify;
+   font-size: 13px;
+   line-height: 1.4;
+   text-align: left;
+   word-spacing: 3px;
 }
 
 .card-elements {
@@ -270,30 +232,6 @@ option[value=""][disabled] {
    color: #a9f96d;
 }
 
-.video-embed {
-   height: 300px;
-   width: 100%;
-}
-
-.wiki {
-   color: white;
-   font-size: 12px;
-   font-weight: bolder;
-   text-decoration: none;
-}
-
-.wiki:link {
-   color: #6f6f6f;
-}
-
-.wiki:hover {
-   color: #ccc;
-}
-
-.wiki:visited {
-   color: #6f6f6f;
-}
-
 
 /**** RODAPÉ ****/
 
@@ -324,6 +262,59 @@ option[value=""][disabled] {
 }
 
 
+/**** FAVORITOS ****/
+
+.favorites {
+   background-color: #111;
+   height: 100%;
+   overflow-x: hidden;
+   padding-top: 60px;
+   position: fixed;
+   right: 0;
+   top: 0;
+   transition: 0.5s;
+}
+
+.favorites a {
+   color: #818181;
+   display: block;
+   font-size: 25px;
+   margin: 5px 5px 5px 32px;
+   text-decoration: none;
+}
+
+.favorites a:hover {
+   color: #f1f1f1;
+   cursor: pointer;
+}
+
+.favorites-items {
+   background-color: #313131;
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+   margin-bottom: 55px;
+   overflow-x: hidden;
+   width: 100%;
+}
+
+.favorite {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   margin-bottom: 18px;
+}
+
+.favorite-title {
+   margin: 18px 8px 15px 8px;
+}
+
+.favorite .tag {
+   margin: 15px 8px 15px 8px;
+}
+
+
 /**** BOTÕES ****/
 
 .btn {
@@ -344,7 +335,8 @@ option[value=""][disabled] {
    border-radius: 4px;
    float: right;
    height: 35px;
-   margin-right: 6px;
+   margin-right: 5px;
+   padding: 10px 14px;
    transform: translateY(8px);
 }
 
@@ -359,9 +351,8 @@ option[value=""][disabled] {
 }
 
 .btn-del {
-   border-radius: 4px;
-   margin: 15px 15px 15px 0px;
-   width: 95%;
+   margin: 0px 9px 0px 9px;
+   flex-basis: 100%;
 }
 
 .btn-del:hover {
@@ -380,14 +371,13 @@ option[value=""][disabled] {
 
 .btn-card {
    border-radius: 4px;
-   float: right;
    height: 35px;
-   margin: 1px;
+   margin: 5px 0px 10px 2px;
    width: 45px;
 }
 
 .btn-card:hover {
-   background-color: #313131;
+   background-color: #5a5a5a;
 }
 
 .btn-up {
@@ -442,27 +432,10 @@ option[value=""][disabled] {
 /**** PARA TABLETS ****/
 
 @media screen and (max-height: 450px) {
-   .favorites {
-      padding-top: 15px;
-   }
-   .favorites a {
-      font-size: 18px;
-   }
-}
-
-
-/**** PARA SMARTPHONES ****/
-
-@media only screen and (max-width:620px) {
    .search form {
       align-items: center;
       display: flex;
       flex-wrap: wrap;
-   }
-   .search-content {
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-      border-bottom-left-radius: 0px;
    }
    .search-content,
    .search-text,
@@ -470,10 +443,55 @@ option[value=""][disabled] {
    .search-number,
    .btn-search {
       width: 100%;
+      border-right: none;
+   }
+   .search-content {
+      border-bottom: 1px solid #3d3d3d;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-left-radius: 0px;
+   }
+   .search-text {
+      border-bottom: 1px solid #3d3d3d;
+   }
+   .search-result {
+      border-bottom: 1px solid #3d3d3d;
    }
    .btn-search {
       border-top-right-radius: 0px;
       border-bottom-left-radius: 4px;
+   }
+   .favorite {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+   }
+   .favorite-title {
+      margin: 18px 8px 0px 8px;
+   }
+   .favorite .tag {
+      flex-basis: 100%;
+      margin: 15px 40% 15px 40%;
+   }
+}
+
+
+/**** PARA SMARTPHONES ****/
+
+@media only screen and (max-width:620px) {
+   section * {
+      max-width: 100%;
+   }
+   .card section {
+      display: block;
+   }
+   .card div {
+      margin: 0 0 20px 0;
+   }
+   .card-header {
+      flex-wrap: wrap;
+      justify-content: center;
    }
    .footer-first {
       display: none;
@@ -483,14 +501,5 @@ option[value=""][disabled] {
       margin-left: 12px;
       text-align: start;
       width: 100%;
-   }
-   .card section {
-      display: block;
-   }
-   .card div {
-      margin: 0 0 40px 0;
-   }
-   section * {
-      max-width: 100%;
    }
 }
