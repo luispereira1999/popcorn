@@ -10,6 +10,8 @@ let numberOfResultsToSearch = 0;
 
 let favorites = [];
 
+let sidebarOpened = false;
+
 
 $(document).ready(function() {
    // iniciar slideshow ao carregar a página
@@ -138,14 +140,16 @@ $(document).ready(function() {
 
    // clicar no botão de mostrar a lista favoritos
    $(".btn-open").click(function() {
+      sidebarOpened = true;
       $(".favorites").css("width", "256px");
       $("main").addClass("main-with-sidebar");
       $("main").removeClass("main-without-sidebar");
    });
 
 
-   // clicar no botão de esconder a lista favoritos
+   // clicar no botão de fechar a lista favoritos
    $(".btn-close").click(function() {
+      sidebarOpened = false;
       $(".favorites").css("width", "0px");
       $("main").addClass("main-without-sidebar");
       $("main").removeClass("main-with-sidebar");
@@ -154,6 +158,19 @@ $(document).ready(function() {
 
    // clicar no botão para ir para o topo da página
    $(".btn-up").click(function() {
-      $("html, body").animate({ scrollTop: 0 }, 1000);
+      $("html").animate({ scrollTop: 0 }, 1000);
+   });
+
+
+   // fechar lista de favoritos ao clicar fora
+   $("html").mouseup(function(e) {
+      if (sidebarOpened) {
+         let elementClicked = $(e.target);
+         let div_favorites = $(".favorites");
+
+         if (!div_favorites.is(elementClicked) && div_favorites.has(elementClicked).length == 0) {
+            $(".btn-close").trigger("click");
+         }
+      }
    });
 });
