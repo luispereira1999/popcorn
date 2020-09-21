@@ -135,6 +135,20 @@ function thereIsHtmlCardsFromLastSearch() {
 }
 
 
+function enableFavoriteIconColor(element) {
+   if (element.is("button")) {
+      element.children().css("color", "#a946ffe3");
+   } else if (element.is("i")) {
+      element.css("color", "#a946ffe3");
+   }
+}
+
+
+function disableFavoriteIconColor(title) {
+   $(".card-header a:contains('" + title + "')").parent().parent().children(".btn-favorite").children("i").css("color", "white");
+}
+
+
 function addFavoriteFromArray(favorites, title) {
    favorites.push(title);
    return favorites;

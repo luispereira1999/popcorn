@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 
    // clicar no botão para a pesquisa principal
-   $(".btn-search").click(function(e) {
+   $(".btn-main-search").click(function(e) {
       e.preventDefault();
 
       searchContentType = getSearchContentOption();
@@ -72,7 +72,7 @@ $(document).ready(function() {
 
 
    // clicar no botão de pesquisa em um card
-   $(".cards").on("click", ".card .search-icon", function(e) {
+   $(".cards").on("click", ".card .btn-card-search", function(e) {
       e.preventDefault();
 
       let h3_card = $(this).parent().children("h3");
@@ -110,26 +110,39 @@ $(document).ready(function() {
 
 
    // clicar no ícone de favorito em um card
-   $(".cards").on("click", ".card .favorite-icon", function() {
+   $(".cards").on("click", ".card .btn-favorite", function(e) {
       let title = $(this).parent().children("h3").text();
 
       if (!favorites.includes(title)) {
          favorites = addFavoriteFromArray(favorites, title);
          createHtmlFavorite(title, searchResultType);
 
+         let thisElement = $(e.target);
+         enableFavoriteIconColor(thisElement);
+
          let numberOfFavorites = getNumberOfFavorites();
          numberOfFavorites = increaseNumberOfFavorites(numberOfFavorites);
+         updateNumberOfFavoritesOnPage(numberOfFavorites);
+      } else {
+         let div_favorite = $(".favorite-title:contains('" + title + "')").parent().remove();
+         favorites = removeFavoriteFromArray(favorites, title);
+         destroyHtmlFavorite(div_favorite);
+         disableFavoriteIconColor(title);
+
+         let numberOfFavorites = getNumberOfFavorites();
+         numberOfFavorites = decreaseNumberOfFavorites(numberOfFavorites);
          updateNumberOfFavoritesOnPage(numberOfFavorites);
       }
    });
 
 
    // clicar no botão de remover favorito
-   $(".favorites-items").on("click", ".favorite .btn-del", function() {
+   $(".favorites-items").on("click", ".favorite .btn-del", function(e) {
       let title = $(this).parent().children("h4").text();
       let div_favorite = $(this).parent();
       favorites = removeFavoriteFromArray(favorites, title);
       destroyHtmlFavorite(div_favorite);
+      disableFavoriteIconColor(title);
 
       let numberOfFavorites = getNumberOfFavorites();
       numberOfFavorites = decreaseNumberOfFavorites(numberOfFavorites);

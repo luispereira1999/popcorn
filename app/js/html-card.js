@@ -28,9 +28,13 @@ class HtmlCard {
       this.div_header.addClass("card-header");
       this.a_wikipediaLink.attr("href", result.wikipediaLink);
       this.a_wikipediaLink.attr("target", "_blank");
-      this.button_favorite.addClass("btn btn-card favorite-icon");
+
+      this.button_favorite.addClass("btn btn-card btn-favorite");
       this.i_favorite.addClass("far fa-star");
-      this.button_search.addClass("btn btn-card search-icon");
+      if (favorites.includes(result.title)) {
+         this.i_favorite.css("color", "#a946ffe3");
+      }
+      this.button_search.addClass("btn btn-card btn-card-search");
       this.i_search.addClass("fas fa-search");
    }
 
