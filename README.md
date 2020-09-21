@@ -1,6 +1,7 @@
 # Popcorn
 Site de pesquisa de recomendações sobre várias categorias (músicas, filmes, jogos e muito mais).
 
+<img width="150" height="150" src="app/images/logo.png">
 
 ## Instalação
 Para colocar o projeto a funcionar localmente na sua máquina basta:
