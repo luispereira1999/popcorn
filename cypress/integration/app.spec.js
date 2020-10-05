@@ -1,3 +1,5 @@
+// este ficheiro serve para criar os testes automáticos
+
 /// <reference types="cypress" />
 
 describe("app", () => {
