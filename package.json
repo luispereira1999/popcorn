@@ -1,0 +1,22 @@
+{
+  "name": "popcorn",
+  "version": "1.0.0",
+  "description": "Site de pesquisa de recomendações sobre várias categorias (músicas, filmes, jogos e muito mais).",
+  "main": "index.html",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luispereira1999/popcorn.git"
+  },
+  "author": "Lara Ribeiro, Luís Pereira, Maria Francisca Costa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luispereira1999/popcorn/issues"
+  },
+  "homepage": "https://github.com/luispereira1999/popcorn#readme"
+}
