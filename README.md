@@ -11,7 +11,7 @@ Para colocar o projeto a funcionar localmente na sua máquina basta:
 
 ## Desenvolvimento
 ### Extrutura
-As pastas e ficheiros do projeto estão estruturadas da seguinte forma:
+As pastas e ficheiros que serão utilizados para o desenvolvimento do projeto estão estruturados da seguinte forma:
 
 app/\
 ├── css/\
@@ -28,6 +28,9 @@ app/\
 │     ├── html-favorite.js\
 │     ├── html-tag.js\
 │     ├── main.js\
+cypress/\
+├── integration/\
+│     ├── app.spec.js\
 └── index.html
 
 ### Diretivas
@@ -58,8 +61,9 @@ Orientações e normas para o desenvolvimento do projeto:
 
 
 ## Testes
-Para testar o seu código use a biblioteca javascript Jasmine, usamos atualmente a versão [3.6.0](https://github.com/jasmine/jasmine/releases/tag/v3.6.0/).
-Entre na pasta "tests" para criar os testes (é recomendado ler a [documentação](https://jasmine.github.io/) da biblioteca).
+Para a criação de testes automáticos usamos o Cypress ([v.5.3.0](https://www.cypress.io/)).\
+Para criar os testes entre na pasta "cypress/integration" e abra o ficheiro "app.spec.js".
+
 
 
 ## Contribuições
