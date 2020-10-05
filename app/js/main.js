@@ -12,7 +12,7 @@ let favorites = [];
 let sidebarOpened = false;
 
 
-$(document).ready(function() {
+$(window).ready(function() {
    // iniciar slideshow ao carregar a página
    let slideshowId = showSlideshow();
 
