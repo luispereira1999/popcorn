@@ -3,6 +3,8 @@ Site de pesquisa de recomendações sobre várias categorias (músicas, filmes, 
 
 <img width="150" height="150" src="app/images/logo.png">
 
+
+
 ## Instalação
 Para colocar o projeto a funcionar localmente na sua máquina basta:
 1. Clonar o repositório ```git clone https://github.com/luispereira1999/popcorn.git```.
@@ -10,7 +12,7 @@ Para colocar o projeto a funcionar localmente na sua máquina basta:
 
 
 ## Desenvolvimento
-### Extrutura
+### Estrutura
 As pastas e ficheiros que serão utilizados para o desenvolvimento do projeto estão estruturados da seguinte forma:
 
 app/\
@@ -37,7 +39,7 @@ cypress/\
 Orientações e normas para o desenvolvimento do projeto:
 
 **Geral**
-- todo o código deve ser sintaticamente válido e estar corretamente identado e comentado.
+- todo o código deve ser sintaticamente válido e estar corretamente indentado e comentado.
 - todo o código deve ser escrito em inglês, apenas comentários escreva em português.
 - todas as funcionalidades introduzidas devem conter testes automáticos.
 
@@ -63,7 +65,6 @@ Orientações e normas para o desenvolvimento do projeto:
 ## Testes
 Para a criação de testes automáticos usamos o Cypress ([v.5.3.0](https://www.cypress.io/)).\
 Para criar os testes entre na pasta "cypress/integration" e abra o ficheiro "app.spec.js".
-
 
 
 ## Contribuições
