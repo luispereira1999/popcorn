@@ -9,6 +9,7 @@ Site de pesquisa de recomendações sobre várias categorias (músicas, filmes, 
 Para colocar o projeto a funcionar localmente na sua máquina basta:
 1. Clonar o repositório ```git clone https://github.com/luispereira1999/popcorn.git```.
 2. Utilizar um editor de código da sua preferência.
+3. Para evitar possíveis erros, recomenda-se executar o website em um servidor HTTP (exemplo: executar com o XAMPP).
 
 
 ## Desenvolvimento
@@ -25,15 +26,15 @@ app/\
 │     ├── 4.png\
 │     ├── logo.png\
 ├── js/\
-│     ├── function.js\
+│     ├── functions.js\
 │     ├── html-card.js\
 │     ├── html-favorite.js\
 │     ├── html-tag.js\
 │     ├── main.js\
+└── index.html\
 cypress/\
 ├── integration/\
-│     ├── app.spec.js\
-└── index.html
+│     ├── app.spec.js
 
 ### Diretivas
 Orientações e normas para o desenvolvimento do projeto:
@@ -63,13 +64,14 @@ Orientações e normas para o desenvolvimento do projeto:
 
 
 ## Testes
-Para a criação de testes automáticos usamos o Cypress ([v.5.3.0](https://www.cypress.io/)).\
-Para criar os testes entre na pasta "cypress/integration" e abra o ficheiro "app.spec.js".
+Para a criação de testes automáticos utilizou-se o Cypress ([v.5.3.0](https://www.cypress.io/)).\
+Para escrever os testes entre na pasta ```cypress/integration``` e abra o ficheiro ```app.spec.js```.\
+Execute o comando ```npm run cypress:open``` para realizar os testes ou ```npm run cypress:run``` para guardar um vídeo dos testes. 
 
 
 ## Contribuições
 Qualquer contribuição é sempre bem-vinda e agradecida (desde reportar erros até adicionar novas funcionalidades).\
-Para poder contribuir em desenvolvimento, leia por favor as diretivas estabelecidas para o desenvolvimento do projeto descritas acima para que outros desenvolvedores possam seguir o mesmo padrão. Não se esqueça-se de escrever testes automatizados.
+Para poder contribuir em desenvolvimento, leia por favor as diretivas estabelecidas para o desenvolvimento do projeto descritas acima para que outros programadores possam seguir o mesmo padrão. Não se esqueça-se de escrever testes automatizados.
 
 
 ## Criadores
